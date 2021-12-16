@@ -18,7 +18,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
-app.MapGet("/", () => "Привет!");
+app.UseRouting();
+
+app.MapDefaultControllerRoute(); // Home Controller
 
 #endregion
 
