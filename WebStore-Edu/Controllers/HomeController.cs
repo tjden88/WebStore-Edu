@@ -16,5 +16,10 @@ namespace WebStore_Edu.Controllers
         {
             return View(TestData.Employees);
         }
+
+        public IActionResult EmployeeDetails(int id)
+        {
+            return View("EmployeeInfo", TestData.Employees.FirstOrDefault(e => e.Id == id));
+        }
     }
 }
