@@ -6,8 +6,9 @@ namespace WebStore_Edu.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Привет!");
-            //return View();
-        }
+            return View();
+            //return View("Index"); // Если названия в папке Views не совпадают
+            // return View("~/Views/Home/Index.cshtml"); // Полный путь
+       }
     }
 }
