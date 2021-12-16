@@ -1,20 +1,20 @@
-#region Построение приложения
+#region РџРѕСЃС‚СЂРѕРµРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
 services.AddControllersWithViews();
-// Вопрос: почему не services.AddMvc(); ? 
+// Р’РѕРїСЂРѕСЃ: РїРѕС‡РµРјСѓ РЅРµ services.AddMvc(); ? 
 
 var app = builder.Build();
 
 #endregion
 
 
-#region Конвейер запросов
+#region РљРѕРЅРІРµР№РµСЂ Р·Р°РїСЂРѕСЃРѕРІ
 
-// Отладочная страница исключений
+// РћС‚Р»Р°РґРѕС‡РЅР°СЏ СЃС‚СЂР°РЅРёС†Р° РёСЃРєР»СЋС‡РµРЅРёР№
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
@@ -24,5 +24,5 @@ app.MapDefaultControllerRoute(); // Home Controller
 
 #endregion
 
-// Запуск приложения
+// Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 app.Run();
