@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore_Edu.Data;
 
 namespace WebStore_Edu.Controllers
 {
@@ -9,6 +10,11 @@ namespace WebStore_Edu.Controllers
             return View();
             //return View("Index"); // Если названия в папке Views не совпадают
             // return View("~/Views/Home/Index.cshtml"); // Полный путь
-       }
+        }
+
+        public IActionResult Employees()
+        {
+            return View(TestData.Employees);
+        }
     }
 }
