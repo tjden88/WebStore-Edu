@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\Contacts.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\NotFoundPage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\Contacts.cshtml" />
   </ItemGroup>
 
 </Project>
