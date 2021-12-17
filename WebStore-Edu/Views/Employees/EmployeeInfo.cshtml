@@ -1,5 +1,9 @@
 ﻿@model WebStore_Edu.Models.Employee
 
+@{
+    ViewData["Title"] = "Сотрудник " + Model.FirstName;
+}
+
 <div class="container">
     <h3>Сотрудник: @Model.LastName @Model.FirstName</h3>
 
