@@ -1,40 +1,32 @@
 ﻿@model IEnumerable<WebStore_Edu.Models.Employee>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Список сотрудников</title>
-</head>
-<body>
-<h2>Список сотрудников</h2>
-<table>
-    <thead>
-    <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Возраст</th>
-        <th/>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var empl in Model)
-    {
+<div class="container">
+    <h2>Список сотрудников</h2>
+    <table class="table">
+        <thead>
         <tr>
-            <td>@empl.LastName</td>
-            <td>@empl.FirstName</td>
-            <td>@empl.Patronymic</td>
-            <td>@empl.Age</td>
-            <td>
-                <a href="~/Home/EmployeeInfo/@empl.Id">Подробно</a>
-            </td>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Возраст</th>
+            <th/>
         </tr>
-    }
-    </tbody>
-</table>
-<a href="~/">Домой</a>
-
-</body>
-</html>
+        </thead>
+        <tbody>
+        @foreach (var empl in Model)
+        {
+            <tr>
+                <td>@empl.LastName</td>
+                <td>@empl.FirstName</td>
+                <td>@empl.Patronymic</td>
+                <td>@empl.Age</td>
+                <td>
+                    <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <hr/>
+    <a asp-controller="Home" asp-action="Index">Домой</a>
+</div>
