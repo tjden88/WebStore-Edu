@@ -9,7 +9,12 @@ namespace WebStore_Edu.Controllers
 
         public IActionResult EmployeeInfo(int id)
         {
-            return View("EmployeeInfo", TestData.Employees.FirstOrDefault(e => e.Id == id));
+            var empl = TestData.Employees.FirstOrDefault(e => e.Id == id);
+
+            if (empl == null)
+                return NotFound();
+
+            return View("EmployeeInfo", empl);
         }
     }
 }
