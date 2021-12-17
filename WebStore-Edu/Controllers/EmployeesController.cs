@@ -14,7 +14,7 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            return View("EmployeeInfo", empl);
+            return View(empl);
         }
     }
 }
