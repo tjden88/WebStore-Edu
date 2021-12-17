@@ -19,6 +19,8 @@
     <_ContentIncludedByDefault Remove="Views\Blogs\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\Contacts.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\NotFoundPage.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shop\Login.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shop\ProductDetails.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +29,14 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Blogs\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shop\ProductDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shop\Login.cshtml" />
   </ItemGroup>
 
 </Project>
