@@ -46,5 +46,16 @@ namespace WebStore_Edu.Controllers
             // return Index(); Так тоже не работает почему-то...
             return View("Index", TestData.Employees);
         }
+
+
+        [HttpPost]
+        public IActionResult DeleteEmployee(Employee item)
+        {
+            if (TestData.Employees.FirstOrDefault(e => e.Id == item.Id) is { } empl)
+            {
+                TestData.Employees.Remove(empl);
+            }
+            return View("Index", TestData.Employees);
+        }
     }
 }
