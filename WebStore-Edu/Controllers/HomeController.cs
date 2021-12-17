@@ -12,5 +12,9 @@ namespace WebStore_Edu.Controllers
             // return View("~/Views/Home/Index.cshtml"); // Полный путь
         }
 
+        public IActionResult NotFoundPage()
+        {
+            return View();
+        }
     }
 }
