@@ -12,14 +12,7 @@ namespace WebStore_Edu.Controllers
             // return View("~/Views/Home/Index.cshtml"); // Полный путь
         }
 
-        public IActionResult Employees()
-        {
-            return View(TestData.Employees);
-        }
-
-        public IActionResult EmployeeInfo(int id)
-        {
-            return View("EmployeeInfo", TestData.Employees.FirstOrDefault(e => e.Id == id));
-        }
+        public IActionResult NotFoundPage() => View();
+        public IActionResult Contacts() => View();
     }
 }

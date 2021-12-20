@@ -1,15 +1,23 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Главная";
+}
 
-<html>
+<partial name="Partial/_Slider" />
 
-<head>
-    <title>Заголовок страницы браузера</title>
-</head>
+<section>
+    <div class="container">
+        <div class="row">
 
-<body>
-    <h2>Представление</h2>
-    <p>Текст представления</p>
-    <a href="~/Home/Employees">Список сотрудников</a>
-</body>
+            <div class="col-sm-3">
+                <partial name="Partial/_LeftSidebar"/>
+            </div>
 
-</html>
+            <div class="col-sm-9 padding-right">
+                <partial name="Partial/_Features"/>
+                <partial name="Partial/_CategoryTab"/>
+                <partial name="Partial/_Recomended"/>
+            </div>
+
+        </div>
+    </div>
+</section>
