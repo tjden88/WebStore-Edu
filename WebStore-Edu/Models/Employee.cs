@@ -15,6 +15,9 @@ public class Employee
     /// <summary> Дата рождения </summary>
     public DateTime Birthday { get; set; }
 
+    /// <summary> Статус </summary>
+    public string Status { get; set; }
+
     /// <summary> Возраст </summary>
     public int Age => GetAge();
 

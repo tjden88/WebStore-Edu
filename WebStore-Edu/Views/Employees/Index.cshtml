@@ -13,6 +13,7 @@
             <th>Имя</th>
             <th>Отчество</th>
             <th>Возраст</th>
+            <th>Живой?</th>
             <th/>
             <th/>
         </tr>
@@ -25,6 +26,7 @@
                 <td>@empl.FirstName</td>
                 <td>@empl.Patronymic</td>
                 <td>@empl.Age</td>
+                <td>@empl.Status</td>
                 <td>
                     <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
                 </td>
