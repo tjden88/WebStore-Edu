@@ -5,7 +5,7 @@ namespace WebStore_Edu.Data
     /// <summary> Тестовые данные </summary>
     public static class TestData
     {
-        private static List<Employee> _Employees;
+        private static List<Employee>? _Employees;
 
         /// <summary> Список сотрудников </summary>
         public static List<Employee> Employees => _Employees ??= new ()

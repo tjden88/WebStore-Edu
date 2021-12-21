@@ -15,10 +15,6 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            // Так не работает. Почему? Есть ли более изящный способ вернуть представление другого контроллера?
-            //if (empl == null)
-            //    return new HomeController().NotFoundPage();
-
             return View(empl);
         }
 
@@ -43,8 +39,7 @@ namespace WebStore_Edu.Controllers
                 empl.Birthday = item.Birthday;
                 empl.Position = item.Position;
             }
-            // return Index(); Так тоже не работает почему-то...
-            return View("Index", TestData.Employees);
+            return RedirectToAction("Index");
         }
 
 
@@ -55,7 +50,7 @@ namespace WebStore_Edu.Controllers
             {
                 TestData.Employees.Remove(empl);
             }
-            return View("Index", TestData.Employees);
+            return RedirectToAction("Index");
         }
     }
 }
