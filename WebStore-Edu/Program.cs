@@ -18,7 +18,7 @@ services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
 
 var app = builder.Build();
 
