@@ -40,11 +40,12 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
-                    <input type="submit" asp-action="DeleteEmployee" value="Удалить сотрудника" class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
+    <a class="btn-sm btn-danger" asp-route-id="@Model.Id" asp-action="DeleteQuestion">Удалить сотрудника</a>
+
     <hr />
     <a asp-action="Index">Назад к списку</a>
 

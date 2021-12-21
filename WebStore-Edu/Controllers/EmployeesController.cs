@@ -21,9 +21,10 @@ namespace WebStore_Edu.Controllers
             .GetAll()
             .Select(empl => _Mapper.Map<EmployeeViewModel>(empl)));
 
-        public IActionResult EmployeeInfo(int id)
+
+        public IActionResult EmployeeInfo(int Id)
         {
-            var empl = _EmployeesData.GetById(id);
+            var empl = _EmployeesData.GetById(Id);
 
             if (empl == null)
                 return NotFound();
@@ -31,15 +32,17 @@ namespace WebStore_Edu.Controllers
             return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
-        public IActionResult EmployeeEdit(int id)
+
+        public IActionResult EmployeeEdit(int Id)
         {
-            var empl = _EmployeesData.GetById(id);
+            var empl = _EmployeesData.GetById(Id);
 
             if (empl == null)
                 return NotFound();
 
             return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
+
 
         [HttpPost]
         public IActionResult EmployeeEdit(EmployeeViewModel item)
@@ -53,10 +56,21 @@ namespace WebStore_Edu.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult DeleteEmployee(EmployeeViewModel item)
+        public IActionResult DeleteQuestion(int Id)
         {
-            if (!_EmployeesData.Delete(item.Id))
+            var empl = _EmployeesData.GetById(Id);
+
+            if (empl == null)
+                return NotFound();
+
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteEmployee(int Id)
+        {
+            if (!_EmployeesData.Delete(Id))
                 return NotFound();
 
             return RedirectToAction("Index");
