@@ -1,4 +1,6 @@
-﻿namespace WebStore_Edu.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebStore_Edu.ViewModels
 {
     public class EmployeeViewModel
     {
@@ -14,6 +16,7 @@
         public string Position { get; set; }
 
         /// <summary> Дата рождения </summary>
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
         public DateTime Birthday { get; set; }
 
         /// <summary> Возраст </summary>
