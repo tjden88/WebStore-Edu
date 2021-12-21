@@ -1,3 +1,7 @@
+using Mapster;
+using MapsterMapper;
+
+
 #region Построение приложения
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddControllersWithViews();
-// Вопрос: почему не services.AddMvc(); ? 
+
+var config = new TypeAdapterConfig();
+services.AddSingleton(config);
+services.AddScoped<IMapper, ServiceMapper>();
 
 var app = builder.Build();
 

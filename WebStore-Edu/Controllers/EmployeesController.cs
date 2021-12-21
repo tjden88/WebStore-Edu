@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Data;
 using WebStore_Edu.ViewModels;
 
@@ -6,17 +7,12 @@ namespace WebStore_Edu.Controllers
 {
     public class EmployeesController : Controller
     {
+        private readonly IMapper _Mapper;
+
+        public EmployeesController(IMapper Mapper) => _Mapper = Mapper;
+
         public IActionResult Index() => View(TestData.Employees
-            .Select(empl => new EmployeeViewModel()
-            {
-                Id = empl.Id,
-                FirstName = empl.FirstName,
-                LastName = empl.LastName,
-                Patronymic = empl.Patronymic,
-                Position = empl.Patronymic,
-                Birthday = empl.Birthday,
-            }
-            ));
+            .Select(empl => _Mapper.Map<EmployeeViewModel>(empl)));
 
         public IActionResult EmployeeInfo(int id)
         {
@@ -25,17 +21,7 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            var model = new EmployeeViewModel
-            {
-                Id = empl.Id,
-                FirstName = empl.FirstName,
-                LastName = empl.LastName,
-                Patronymic = empl.Patronymic,
-                Position = empl.Patronymic,
-                Birthday = empl.Birthday,
-            };
-
-            return View(model);
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
         public IActionResult EmployeeEdit(int id)
@@ -45,17 +31,7 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            var model = new EmployeeViewModel
-            {
-                Id = empl.Id,
-                FirstName = empl.FirstName,
-                LastName = empl.LastName,
-                Patronymic = empl.Patronymic,
-                Position = empl.Patronymic,
-                Birthday = empl.Birthday,
-            };
-
-            return View(model);
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
         [HttpPost]
