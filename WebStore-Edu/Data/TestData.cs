@@ -12,7 +12,7 @@ namespace WebStore_Edu.Data
         {
             new()
             {
-                Id = 0,
+                Id = 1,
                 FirstName = "Иван",
                 Patronymic = "Васильевич",
                 LastName = "Грозный",
@@ -21,7 +21,7 @@ namespace WebStore_Edu.Data
             },
             new()
             {
-                Id = 1,
+                Id = 2,
                 FirstName = "Василий",
                 Patronymic = "Петрович",
                 LastName = "Васильев",
@@ -30,7 +30,7 @@ namespace WebStore_Edu.Data
             },
             new()
             {
-                Id = 2,
+                Id = 3,
                 FirstName = "Денис",
                 Patronymic = "Владимирович",
                 LastName = "Дульцев",

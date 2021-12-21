@@ -33,9 +33,13 @@ namespace WebStore_Edu.Controllers
         }
 
 
-        public IActionResult EmployeeEdit(int Id)
+        public IActionResult EmployeeEdit(int? Id)
         {
-            var empl = _EmployeesData.GetById(Id);
+            if (Id is null)
+                return View(new EmployeeViewModel());
+
+
+            var empl = _EmployeesData.GetById((int) Id);
 
             if (empl == null)
                 return NotFound();
@@ -49,7 +53,9 @@ namespace WebStore_Edu.Controllers
         {
             var employee = _Mapper.Map<Employee>(item);
 
-            if (!_EmployeesData.Update(employee))
+            if (employee.Id == 0)
+                _EmployeesData.Add(employee);
+            else if (!_EmployeesData.Update(employee))
                 return NotFound();
 
             return RedirectToAction("Index");
