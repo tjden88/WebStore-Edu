@@ -6,36 +6,45 @@
 
 <div class="container">
     <h2>Список сотрудников</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Возраст</th>
-            <th/>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var empl in Model)
-        {
-            <tr>
-                <td>@empl.LastName</td>
-                <td>@empl.FirstName</td>
-                <td>@empl.Patronymic</td>
-                <td>@empl.Age</td>
-                <td>
-                    <div class="fa fa-info">
-                        <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
-                    </div>  
-                    <div class="fa fa-edit">
-                        <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
-                    </div>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    <hr/>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Возраст</th>
+                    <th />
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var empl in Model)
+                {
+                    <tr>
+                        <td>@empl.LastName</td>
+                        <td>@empl.FirstName</td>
+                        <td>@empl.Patronymic</td>
+                        <td>@empl.Age</td>
+                        <td>
+                            <div class="fa fa-info">
+                                <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
+                            </div>
+                            <div class="fa fa-edit">
+                                <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>Сотрудников нет...</p>
+    }
+    <hr />
     <a asp-controller="Home" asp-action="Index">Домой</a>
 </div>
