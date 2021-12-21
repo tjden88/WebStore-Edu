@@ -1,5 +1,7 @@
 using Mapster;
 using MapsterMapper;
+using WebStore_Edu.Services;
+using WebStore_Edu.Services.Interfaces;
 
 
 #region Построение приложения
@@ -10,9 +12,13 @@ var services = builder.Services;
 
 services.AddControllersWithViews();
 
+// Mapster
 var config = new TypeAdapterConfig();
 services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
+
+// Add Services
+services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
 var app = builder.Build();
 
