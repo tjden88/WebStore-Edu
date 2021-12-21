@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Data;
-using WebStore_Edu.Models;
+using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
 {
     public class EmployeesController : Controller
     {
-        public IActionResult Index() => View(TestData.Employees);
+        public IActionResult Index() => View(TestData.Employees
+            .Select(empl => new EmployeeViewModel()
+            {
+                Id = empl.Id,
+                FirstName = empl.FirstName,
+                LastName = empl.LastName,
+                Patronymic = empl.Patronymic,
+                Position = empl.Patronymic,
+                Birthday = empl.Birthday,
+            }
+            ));
 
         public IActionResult EmployeeInfo(int id)
         {
@@ -15,7 +25,17 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            return View(empl);
+            var model = new EmployeeViewModel
+            {
+                Id = empl.Id,
+                FirstName = empl.FirstName,
+                LastName = empl.LastName,
+                Patronymic = empl.Patronymic,
+                Position = empl.Patronymic,
+                Birthday = empl.Birthday,
+            };
+
+            return View(model);
         }
 
         public IActionResult EmployeeEdit(int id)
@@ -25,11 +45,21 @@ namespace WebStore_Edu.Controllers
             if (empl == null)
                 return NotFound();
 
-            return View(empl);
+            var model = new EmployeeViewModel
+            {
+                Id = empl.Id,
+                FirstName = empl.FirstName,
+                LastName = empl.LastName,
+                Patronymic = empl.Patronymic,
+                Position = empl.Patronymic,
+                Birthday = empl.Birthday,
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult EmployeeEdit(Employee item)
+        public IActionResult EmployeeEdit(EmployeeViewModel item)
         {
             if (TestData.Employees.FirstOrDefault(e => e.Id == item.Id) is { } empl)
             {
@@ -44,7 +74,7 @@ namespace WebStore_Edu.Controllers
 
 
         [HttpPost]
-        public IActionResult DeleteEmployee(Employee item)
+        public IActionResult DeleteEmployee(EmployeeViewModel item)
         {
             if (TestData.Employees.FirstOrDefault(e => e.Id == item.Id) is { } empl)
             {
