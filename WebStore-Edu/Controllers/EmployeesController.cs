@@ -51,6 +51,9 @@ namespace WebStore_Edu.Controllers
         [HttpPost]
         public IActionResult EmployeeEdit(EmployeeViewModel item)
         {
+            if (!ModelState.IsValid)
+                return RedirectToAction("EmployeeEdit", item.Id);
+
             var employee = _Mapper.Map<Employee>(item);
 
             if (employee.Id == 0)
