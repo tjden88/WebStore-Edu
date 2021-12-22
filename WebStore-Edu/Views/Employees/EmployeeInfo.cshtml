@@ -9,38 +9,50 @@
 
     <table>
         <thead>
-        <tr />
-        <tr />
+            <tr />
+            <tr />
         </thead>
         <tbody>
-        <tr>
-            <td>Фамилия</td>
-            <td>@Model.LastName</td>
-        </tr>
-        <tr>
-            <td>Имя</td>
-            <td>@Model.FirstName</td>
-        </tr>
-        <tr>
-            <td>Отчество</td>
-            <td>@Model.Patronymic</td>
-        </tr>
-        <tr>
-            <td>Дата рождения</td>
-            <td>@Model.Birthday.ToString("d MMMM yyyy")</td>
-        </tr>
-        <tr>
-            <td>Возраст</td>
-            <td>@Model.Age</td>
-        </tr>
-        <tr>
-            <td>Должность</td>
-            <td>@Model.Position</td>
-        </tr>
+            <tr>
+                <td>
+                    <label asp-for="LastName"></label>
+                </td>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="FirstName"></label>
+                </td>
+                <td>@Model.FirstName</td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Patronymic"></label>
+                </td>
+                <td>@Model.Patronymic</td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Birthday"></label>
+                </td>
+                <td>@Model.Birthday.ToString("d MMMM yyyy")</td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Age"></label>
+                </td>
+                <td>@Model.Age</td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Position"></label>
+                </td>
+                <td>@Model.Position</td>
+            </tr>
 
         </tbody>
     </table>
-    <hr/>
+    <hr />
     <a asp-action="Index">Вернуться к списку сотрудников</a>
 </div>
 
