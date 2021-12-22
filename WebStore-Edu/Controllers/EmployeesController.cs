@@ -52,7 +52,7 @@ namespace WebStore_Edu.Controllers
         public IActionResult EmployeeEdit(EmployeeViewModel item)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("EmployeeEdit", item.Id);
+                return View(item);
 
             var employee = _Mapper.Map<Employee>(item);
 
