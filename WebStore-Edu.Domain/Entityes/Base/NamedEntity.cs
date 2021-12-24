@@ -2,7 +2,7 @@
 
 namespace WebStore_Edu.Domain.Entityes.Base
 {
-    public class NamedEntity : Entity, INamedEntity
+    public abstract class NamedEntity : Entity, INamedEntity
     {
         public string Name { get; set; }
     }
