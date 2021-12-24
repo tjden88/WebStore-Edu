@@ -40,4 +40,8 @@
     <UpToDateCheckInput Remove="Views\Shop\Login.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebStore-Edu.Domain\WebStore-Edu.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
