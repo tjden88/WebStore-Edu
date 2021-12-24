@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\Sections\Default.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Blogs\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\Contacts.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\NotFoundPage.cshtml" />
@@ -42,6 +43,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebStore-Edu.Domain\WebStore-Edu.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Components\Sections\Default.cshtml" />
   </ItemGroup>
 
 </Project>
