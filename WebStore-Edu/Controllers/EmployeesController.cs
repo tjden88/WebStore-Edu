@@ -1,61 +1,94 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebStore_Edu.Data;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Models;
+using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
 {
     public class EmployeesController : Controller
     {
-        public IActionResult Index() => View(TestData.Employees);
+        private readonly IMapper _Mapper;
+        private readonly IEmployeesData _EmployeesData;
 
-        public IActionResult EmployeeInfo(int id)
+        public EmployeesController(IMapper Mapper, IEmployeesData EmployeesData)
         {
-            var empl = TestData.Employees.FirstOrDefault(e => e.Id == id);
+            _Mapper = Mapper;
+            _EmployeesData = EmployeesData;
+        }
+
+        public IActionResult Index() => View(_EmployeesData
+            .GetAll()
+            .Select(empl => _Mapper.Map<EmployeeViewModel>(empl)));
+
+
+        public IActionResult EmployeeInfo(int Id)
+        {
+            var empl = _EmployeesData.GetById(Id);
 
             if (empl == null)
                 return NotFound();
 
-            // Так не работает. Почему? Есть ли более изящный способ вернуть представление другого контроллера?
-            //if (empl == null)
-            //    return new HomeController().NotFoundPage();
-
-            return View(empl);
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
-        public IActionResult EmployeeEdit(int id)
+
+        public IActionResult EmployeeEdit(int? Id)
         {
-            var empl = TestData.Employees.FirstOrDefault(e => e.Id == id);
+            if (Id is null)
+                return View(new EmployeeViewModel());
+
+
+            var empl = _EmployeesData.GetById((int) Id);
 
             if (empl == null)
                 return NotFound();
 
-            return View(empl);
-        }
-
-        [HttpPost]
-        public IActionResult EmployeeEdit(Employee item)
-        {
-            if (TestData.Employees.FirstOrDefault(e => e.Id == item.Id) is { } empl)
-            {
-                empl.FirstName = item.FirstName;
-                empl.LastName = item.LastName;
-                empl.Patronymic = item.Patronymic;
-                empl.Birthday = item.Birthday;
-                empl.Position = item.Position;
-            }
-            // return Index(); Так тоже не работает почему-то...
-            return View("Index", TestData.Employees);
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
 
         [HttpPost]
-        public IActionResult DeleteEmployee(Employee item)
+        public IActionResult EmployeeEdit(EmployeeViewModel model)
         {
-            if (TestData.Employees.FirstOrDefault(e => e.Id == item.Id) is { } empl)
+            var age = model.Age;
+            if(age < 18)
             {
-                TestData.Employees.Remove(empl);
+                ModelState.AddModelError(nameof(model.Birthday), "Возраст должен быть не менее 18 лет");
             }
-            return View("Index", TestData.Employees);
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var employee = _Mapper.Map<Employee>(model);
+
+            if (employee.Id == 0)
+                _EmployeesData.Add(employee);
+            else if (!_EmployeesData.Update(employee))
+                return NotFound();
+
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult DeleteQuestion(int Id)
+        {
+            var empl = _EmployeesData.GetById(Id);
+
+            if (empl == null)
+                return NotFound();
+
+            return View(_Mapper.Map<EmployeeViewModel>(empl));
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteEmployee(int Id)
+        {
+            if (!_EmployeesData.Delete(Id))
+                return NotFound();
+
+            return RedirectToAction("Index");
         }
     }
 }

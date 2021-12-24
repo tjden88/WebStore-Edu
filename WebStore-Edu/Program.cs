@@ -1,3 +1,9 @@
+using Mapster;
+using MapsterMapper;
+using WebStore_Edu.Services;
+using WebStore_Edu.Services.Interfaces;
+
+
 #region Построение приложения
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,7 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddControllersWithViews();
-// Вопрос: почему не services.AddMvc(); ? 
+
+// Mapster
+var config = new TypeAdapterConfig();
+services.AddSingleton(config);
+services.AddScoped<IMapper, ServiceMapper>();
+
+// Add Services
+services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
 
 var app = builder.Build();
 

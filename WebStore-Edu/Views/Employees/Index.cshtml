@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebStore_Edu.Models.Employee>
+@model IEnumerable<EmployeeViewModel>
 
 @{
     ViewData["Title"] = "Сотрудники";
@@ -6,37 +6,46 @@
 
 <div class="container">
     <h2>Список сотрудников</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Фамилия</th>
-            <th>Имя</th>
-            <th>Отчество</th>
-            <th>Возраст</th>
-            <th>Живой?</th>
-            <th/>
-            <th/>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var empl in Model)
-        {
-            <tr>
-                <td>@empl.LastName</td>
-                <td>@empl.FirstName</td>
-                <td>@empl.Patronymic</td>
-                <td>@empl.Age</td>
-                <td>@empl.Status</td>
-                <td>
-                    <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
-                </td>
-                <td>
-                    <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    <hr/>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(e =>e.LastName)</th>
+                    <th>@Html.DisplayNameFor(e =>e.FirstName)</th>
+                    <th>@Html.DisplayNameFor(e =>e.Patronymic)</th>
+                    <th>@Html.DisplayNameFor(e =>e.Age)</th>
+                    <th />
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var empl in Model)
+                {
+                    <tr>
+                        <td>@empl.LastName</td>
+                        <td>@empl.FirstName</td>
+                        <td>@empl.Patronymic</td>
+                        <td>@empl.Age</td>
+                        <td>
+                            <div class="fa fa-info">
+                                <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
+                            </div>
+                            <div class="fa fa-edit">
+                                <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>Сотрудников нет...</p>
+    }
+    <hr />
+    <a class="btn btn-info" asp-action="EmployeeEdit">Добавить сотрудника</a>
     <a asp-controller="Home" asp-action="Index">Домой</a>
 </div>
