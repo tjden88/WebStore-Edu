@@ -14,5 +14,4 @@ public class Employee
 
     /// <summary> Дата рождения </summary>
     public DateTime Birthday { get; set; }
-
 }

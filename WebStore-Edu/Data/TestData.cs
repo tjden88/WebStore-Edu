@@ -17,7 +17,8 @@ namespace WebStore_Edu.Data
                 Patronymic = "Васильевич",
                 LastName = "Грозный",
                 Birthday = DateTime.Parse("15.10.1957"),
-                Position = "Начальник Всея Руси"
+                Position = "Начальник Всея Руси",
+                Status = "Всегда жив!"
             },
             new()
             {
@@ -26,7 +27,8 @@ namespace WebStore_Edu.Data
                 Patronymic = "Петрович",
                 LastName = "Васильев",
                 Birthday = DateTime.Parse("03.03.1980"),
-                Position = "Менеджер"
+                Position = "Менеджер",
+                Status = "Пока жив"
             },
             new()
             {
@@ -35,7 +37,8 @@ namespace WebStore_Edu.Data
                 Patronymic = "Владимирович",
                 LastName = "Дульцев",
                 Birthday = DateTime.Parse("18.08.1988"),
-                Position = "Студент GB"
+                Position = "Студент GB",
+                Status = "Вроде жив"
             }
         };
     }
