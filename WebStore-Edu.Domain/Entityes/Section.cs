@@ -6,6 +6,6 @@ namespace WebStore_Edu.Domain.Entityes
     public class Section : OrderedNamedEntity
     {
         /// <summary>ID родительской секции</summary>
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
     }
 }
