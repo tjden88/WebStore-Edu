@@ -49,12 +49,18 @@ namespace WebStore_Edu.Controllers
 
 
         [HttpPost]
-        public IActionResult EmployeeEdit(EmployeeViewModel item)
+        public IActionResult EmployeeEdit(EmployeeViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(item);
+            var age = model.Age;
+            if(age < 18)
+            {
+                ModelState.AddModelError(nameof(model.Birthday), "Возраст должен быть не менее 18 лет");
+            }
 
-            var employee = _Mapper.Map<Employee>(item);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var employee = _Mapper.Map<Employee>(model);
 
             if (employee.Id == 0)
                 _EmployeesData.Add(employee);
