@@ -1,8 +1,9 @@
-﻿namespace WebStore_Edu.Models;
-public class Employee
-{
-    public int Id { get; set;}
+﻿using System;
+using WebStore_Edu.Domain.Entityes.Base;
 
+namespace WebStore_Edu.Domain.Entityes;
+public class Employee : Entity
+{
     public string FirstName { get; set; }
 
     public string LastName { get; set; }

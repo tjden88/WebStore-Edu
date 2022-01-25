@@ -1,6 +1,6 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
-using WebStore_Edu.Models;
+using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
 

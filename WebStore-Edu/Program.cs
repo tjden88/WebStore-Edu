@@ -1,6 +1,9 @@
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
+using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Services;
+using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
 
 
@@ -18,8 +21,13 @@ services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
-services.AddSingleton<IProductData, InMemoryProductData>();
+services.AddScoped<IEmployeesData, SqlEmployeesData>();
+services.AddScoped<IProductData, SqlProductData>();
+services.AddScoped<IDbInitializer, DbInitializer>();
+
+// Add db
+services.AddDbContext<WebStoreDb>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 var app = builder.Build();
 
@@ -51,6 +59,14 @@ app.MapDefaultControllerRoute(); // Home Controller
 
 
 #endregion
+
+// Инициализация данных БД
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    await scope.ServiceProvider.GetRequiredService<IDbInitializer>().InitializeAsync();
+}
+
 
 // Запуск приложения
 app.Run();
