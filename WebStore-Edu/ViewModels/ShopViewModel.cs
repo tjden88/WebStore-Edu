@@ -7,6 +7,6 @@ namespace WebStore_Edu.ViewModels
 
         public int? SectionId { get; set; }
 
-        IEnumerable<ProductViewModel> Products { get; set; } = Enumerable.Empty<ProductViewModel>();
+        public IEnumerable<ProductViewModel> Products { get; set; } = Enumerable.Empty<ProductViewModel>();
     }
 }
