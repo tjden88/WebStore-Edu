@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
 {
@@ -6,11 +7,16 @@ namespace WebStore_Edu.Controllers
     {
         public IActionResult Authorize() => View();
 
-        public IActionResult Register()
+        [HttpPost]
+        public IActionResult Register(RegisterUserViewModel Model)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View(Model);
+
+            return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
         public IActionResult Login()
         {
             return View();
