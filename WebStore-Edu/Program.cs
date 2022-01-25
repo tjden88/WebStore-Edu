@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.InMemory;
+using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
 
 
@@ -22,7 +23,7 @@ services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
 services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
-services.AddSingleton<IProductData, InMemoryProductData>();
+services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
 
 // Add db
