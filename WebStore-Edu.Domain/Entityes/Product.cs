@@ -13,6 +13,6 @@ namespace WebStore_Edu.Domain.Entityes
 
         public int SectionId { get; set; }
 
-        public int BrandId { get; set; }
+        public int? BrandId { get; set; }
     }
 }
