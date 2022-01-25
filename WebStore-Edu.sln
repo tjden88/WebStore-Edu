@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore-Edu", "WebStore-Edu\WebStore-Edu.csproj", "{944919E5-405D-41F1-985D-2CC9CFF5AC49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore-Edu", "WebStore-Edu\WebStore-Edu.csproj", "{944919E5-405D-41F1-985D-2CC9CFF5AC49}"
+	ProjectSection(ProjectDependencies) = postProject
+		{64AC61DE-E6C6-42EF-98DB-0341E841C142} = {64AC61DE-E6C6-42EF-98DB-0341E841C142}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore-Edu.Domain", "WebStore-Edu.Domain\WebStore-Edu.Domain.csproj", "{64AC61DE-E6C6-42EF-98DB-0341E841C142}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{944919E5-405D-41F1-985D-2CC9CFF5AC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944919E5-405D-41F1-985D-2CC9CFF5AC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944919E5-405D-41F1-985D-2CC9CFF5AC49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64AC61DE-E6C6-42EF-98DB-0341E841C142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64AC61DE-E6C6-42EF-98DB-0341E841C142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64AC61DE-E6C6-42EF-98DB-0341E841C142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64AC61DE-E6C6-42EF-98DB-0341E841C142}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
