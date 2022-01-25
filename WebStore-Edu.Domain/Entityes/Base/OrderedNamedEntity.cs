@@ -1,4 +1,5 @@
-﻿using WebStore_Edu.Domain.Entityes.Base.Interfaces;
+﻿using System.Runtime.CompilerServices;
+using WebStore_Edu.Domain.Entityes.Base.Interfaces;
 
 namespace WebStore_Edu.Domain.Entityes.Base
 {
