@@ -1,4 +1,4 @@
-﻿using WebStore_Edu.Models;
+﻿using WebStore_Edu.Domain.Entityes;
 
 namespace WebStore_Edu.Services.Interfaces
 {

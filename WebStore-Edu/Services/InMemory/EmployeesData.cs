@@ -1,6 +1,6 @@
 ﻿using MapsterMapper;
 using WebStore_Edu.Data;
-using WebStore_Edu.Models;
+using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
 
 namespace WebStore_Edu.Services.InMemory

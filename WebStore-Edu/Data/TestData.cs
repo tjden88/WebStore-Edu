@@ -1,5 +1,4 @@
 ﻿using WebStore_Edu.Domain.Entityes;
-using WebStore_Edu.Models;
 
 namespace WebStore_Edu.Data
 {

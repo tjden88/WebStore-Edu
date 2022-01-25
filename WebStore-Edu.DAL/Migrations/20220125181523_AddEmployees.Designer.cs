@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore_Edu.DAL.Context;
 
@@ -11,9 +12,10 @@ using WebStore_Edu.DAL.Context;
 namespace WebStore_Edu.DAL.Migrations
 {
     [DbContext(typeof(WebStoreDb))]
-    partial class WebStoreDbModelSnapshot : ModelSnapshot
+    [Migration("20220125181523_AddEmployees")]
+    partial class AddEmployees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
