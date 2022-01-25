@@ -17,9 +17,7 @@ namespace WebStore_Edu.Controllers
             _EmployeesData = EmployeesData;
         }
 
-        public IActionResult Index() => View(_EmployeesData
-            .GetAll()
-            .Select(empl => _Mapper.Map<EmployeeViewModel>(empl)));
+        public IActionResult Index() => View(_Mapper.Map<IEnumerable<EmployeeViewModel>>(_EmployeesData.GetAll()));
 
 
         public IActionResult EmployeeInfo(int Id)

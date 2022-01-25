@@ -2,17 +2,16 @@
 
 @{
     ViewData["Title"] = "Удаление сотрудника";
+    Layout = "_LayoutContainer";
 }
 
-<div class="container">
-    <h1>Внимание!</h1>
+<h1>Внимание!</h1>
 
-    <h3>Удалить сотрудника @Model.LastName @Model.FirstName @Model.Patronymic?</h3>
-    <div>
-        <hr />
-        <form asp-action="DeleteEmployee" asp-route-Id="@Model.Id">
-            <input type="submit" value="Удалить" class="btn btn-danger" /> |
-            <a asp-action="EmployeeEdit" asp-route-id="@Model.Id">Назад к редактированию</a>
-        </form>
-    </div>
+<h3>Удалить сотрудника @Model.LastName @Model.FirstName @Model.Patronymic?</h3>
+<div>
+    <hr />
+    <form asp-action="DeleteEmployee" asp-route-Id="@Model.Id">
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-action="EmployeeEdit" asp-route-id="@Model.Id">Назад к редактированию</a>
+    </form>
 </div>
