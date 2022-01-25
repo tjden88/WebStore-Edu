@@ -3,7 +3,7 @@ using WebStore_Edu.Data;
 using WebStore_Edu.Models;
 using WebStore_Edu.Services.Interfaces;
 
-namespace WebStore_Edu.Services
+namespace WebStore_Edu.Services.InMemory
 {
     public class InMemoryEmployeesData : IEmployeesData
     {

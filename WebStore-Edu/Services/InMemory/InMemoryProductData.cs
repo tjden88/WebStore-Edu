@@ -3,7 +3,7 @@ using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
 
-namespace WebStore_Edu.Services;
+namespace WebStore_Edu.Services.InMemory;
 
 public class InMemoryProductData : IProductData
 {
