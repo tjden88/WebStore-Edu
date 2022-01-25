@@ -22,6 +22,7 @@ services.AddScoped<IMapper, ServiceMapper>();
 // Add Services
 services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
 services.AddSingleton<IProductData, InMemoryProductData>();
+services.AddScoped<IDbInitializer, DbInitializer>();
 
 // Add db
 services.AddDbContext<WebStoreDb>(opt =>
@@ -57,6 +58,14 @@ app.MapDefaultControllerRoute(); // Home Controller
 
 
 #endregion
+
+// Инициализация данных БД
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    await scope.ServiceProvider.GetRequiredService<IDbInitializer>().InitializeAsync();
+}
+
 
 // Запуск приложения
 app.Run();
