@@ -59,28 +59,37 @@ namespace WebStore_Edu.Services
 
             _Logger.LogInformation("Добавление категорий товаров...");
 
-            await using (await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
+            await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Sections.AddRangeAsync(TestData.Sections, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON", Cancel); // TODO: плохо так делать
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF", Cancel);
+                await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление категорий товаров выполнено");
 
 
             _Logger.LogInformation("Добавление брендов...");
-            await using (await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
+            await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Brands.AddRangeAsync(TestData.Brands, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON", Cancel);
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF", Cancel);
+                await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление брендов выполнено");
 
 
             _Logger.LogInformation("Добавление товаров...");
-            await using (await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
+            await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Products.AddRangeAsync(TestData.Products, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON", Cancel);
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF", Cancel);
+                await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление товаров выполнено");
         }
