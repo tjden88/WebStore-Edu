@@ -53,7 +53,7 @@ services.ConfigureApplicationCookie(opt =>
 {
     opt.Cookie.Name = "WebStore-Edu";
     opt.Cookie.HttpOnly = true;
-    opt.Cookie.Expiration = TimeSpan.FromDays(5);
+    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
     opt.LoginPath = "/Account/Login";
     opt.AccessDeniedPath = "/Account/AccessDenied";
 

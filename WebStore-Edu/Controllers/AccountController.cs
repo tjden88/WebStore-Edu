@@ -4,6 +4,8 @@ namespace WebStore_Edu.Controllers
 {
     public class AccountController : Controller
     {
+        public IActionResult Authorize() => View();
+
         public IActionResult Register()
         {
             return View();
