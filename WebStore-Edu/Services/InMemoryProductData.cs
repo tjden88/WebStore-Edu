@@ -14,11 +14,11 @@ public class InMemoryProductData : IProductData
     public IEnumerable<Product> GetProducts(ProductFilter? filter = null)
     {
         var query = TestData.Products;
-        if (filter is {SectionId: var section})
+        if (filter?.SectionId is { } section)
         {
             query = query.Where(p => p.SectionId == section);
         }
-        if (filter is { BrandId: var brand })
+        if (filter?.BrandId is { } brand)
         {
             query = query.Where(p => p.BrandId == brand);
         }
