@@ -1,5 +1,7 @@
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
+using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.Interfaces;
 
@@ -20,6 +22,10 @@ services.AddScoped<IMapper, ServiceMapper>();
 // Add Services
 services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
 services.AddSingleton<IProductData, InMemoryProductData>();
+
+// Add db
+services.AddDbContext<WebStoreDb>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 var app = builder.Build();
 
