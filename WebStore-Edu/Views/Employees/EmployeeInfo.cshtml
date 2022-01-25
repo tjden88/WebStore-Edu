@@ -2,57 +2,57 @@
 
 @{
     ViewData["Title"] = "Сотрудник " + Model.FirstName;
+    Layout = "_LayoutContainer";
+
 }
 
-<div class="container">
-    <h3>Сотрудник: @Model.LastName @Model.FirstName</h3>
+<h3>Сотрудник: @Model.LastName @Model.FirstName</h3>
 
-    <table>
-        <thead>
-            <tr />
-            <tr />
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <label asp-for="LastName"></label>
-                </td>
-                <td>@Model.LastName</td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="FirstName"></label>
-                </td>
-                <td>@Model.FirstName</td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Patronymic"></label>
-                </td>
-                <td>@Model.Patronymic</td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Birthday"></label>
-                </td>
-                <td>@Model.Birthday.ToString("d MMMM yyyy")</td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Age"></label>
-                </td>
-                <td>@Model.Age</td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Position"></label>
-                </td>
-                <td>@Model.Position</td>
-            </tr>
+<table>
+    <thead>
+        <tr />
+        <tr />
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <label asp-for="LastName"></label>
+            </td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="FirstName"></label>
+            </td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Patronymic"></label>
+            </td>
+            <td>@Model.Patronymic</td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Birthday"></label>
+            </td>
+            <td>@Model.Birthday.ToString("d MMMM yyyy")</td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Age"></label>
+            </td>
+            <td>@Model.Age</td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Position"></label>
+            </td>
+            <td>@Model.Position</td>
+        </tr>
 
-        </tbody>
-    </table>
-    <hr />
-    <a asp-action="Index">Вернуться к списку сотрудников</a>
-</div>
+    </tbody>
+</table>
+<hr/>
+<a asp-action="Index">Вернуться к списку сотрудников</a>
 
