@@ -49,6 +49,17 @@ services.Configure<IdentityOptions>(opt =>
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
 });
 
+services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.Name = "WebStore-Edu";
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.Expiration = TimeSpan.FromDays(5);
+    opt.LoginPath = "/Account/Login";
+    opt.AccessDeniedPath = "/Account/AccessDenied";
+
+    opt.SlidingExpiration = true;
+});
+
 // Add db
 services.AddDbContext<WebStoreDb>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
