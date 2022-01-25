@@ -32,11 +32,23 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
+app.Use(async (context, next) => // 404 страница для всех неверных адресов
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {
+        context.Request.Path = "/Home/NotFoundPage";
+        await next();
+    }
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.MapDefaultControllerRoute(); // Home Controller
+
+
 
 #endregion
 
