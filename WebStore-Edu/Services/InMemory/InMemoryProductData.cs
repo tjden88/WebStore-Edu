@@ -5,6 +5,8 @@ using WebStore_Edu.Services.Interfaces;
 
 namespace WebStore_Edu.Services.InMemory;
 
+[Obsolete("Хранение данных в памяти не рекомендуется")]
+
 public class InMemoryProductData : IProductData
 {
     public IEnumerable<Section> GetSections() => TestData.Sections;

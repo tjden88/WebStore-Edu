@@ -92,6 +92,18 @@ namespace WebStore_Edu.Services
                 await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление товаров выполнено");
+
+            _Logger.LogInformation("Добавление сотрудников...");
+            await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
+            {
+                await _Db.Employees.AddRangeAsync(TestData.Employees, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] ON", Cancel);
+                await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] OFF", Cancel);
+                await transaction.CommitAsync(Cancel).ConfigureAwait(false);
+            }
+            _Logger.LogInformation("Добавление сотрудников выполнено");
+
         }
     }
 }

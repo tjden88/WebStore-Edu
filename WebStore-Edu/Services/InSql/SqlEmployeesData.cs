@@ -1,33 +1,36 @@
 ﻿using MapsterMapper;
-using WebStore_Edu.Data;
+using Microsoft.EntityFrameworkCore;
+using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
 
-namespace WebStore_Edu.Services.InMemory
+namespace WebStore_Edu.Services.InSql
 {
-    [Obsolete("Хранение данных в памяти не рекомендуется")]
-    public class InMemoryEmployeesData : IEmployeesData
-    {
-        private readonly IMapper _Mapper;
-        private readonly ILogger<InMemoryEmployeesData> _Logger;
+    public class SqlEmployeesData : IEmployeesData
 
-        public InMemoryEmployeesData(IMapper Mapper, ILogger<InMemoryEmployeesData> Logger)
+    {
+        private readonly WebStoreDb _Db;
+        private readonly IMapper _Mapper;
+        private readonly ILogger<SqlEmployeesData> _Logger;
+
+        public SqlEmployeesData(WebStoreDb Db, IMapper Mapper, ILogger<SqlEmployeesData> Logger)
         {
+            _Db = Db;
             _Mapper = Mapper;
             _Logger = Logger;
         }
 
-        public IEnumerable<Employee> GetAll() => TestData.Employees;
+        public IEnumerable<Employee> GetAll() => _Db.Employees;
 
-        public Employee? GetById(int Id) => TestData.Employees.FirstOrDefault(e => e.Id == Id);
+        public Employee? GetById(int Id) => _Db.Employees.FirstOrDefault(e => e.Id == Id);
 
         public int Add(Employee employee)
         {
             if (employee is null)
                 throw new ArgumentNullException(nameof(employee));
 
-            employee.Id = GetNextId();
-            TestData.Employees.Add(employee);
+            _Db.Entry(employee).State = EntityState.Added;
+            _Db.SaveChanges();
             _Logger.LogInformation("Добавлен новый сотрудник: {0}", employee);
             return employee.Id;
         }
@@ -43,30 +46,28 @@ namespace WebStore_Edu.Services.InMemory
                 return false;
             }
 
-            //empl = _Mapper.Map<Employee>(employee);
+            _Db.Entry(employee).State = EntityState.Modified;
+            _Db.SaveChanges();
 
-            _Mapper.Map(employee, empl);
             _Logger.LogInformation("Изменён сотрудник: {0}", empl);
-
 
             return true;
         }
 
         public bool Delete(int Id)
         {
-            if (GetById(Id) is not { } empl)
+            if (GetById(Id) is not { } employee)
             {
                 _Logger.LogWarning("Попытка удалить несуществующего сотрудника с id:{0}", Id);
                 return false;
             }
 
-            TestData.Employees.Remove(empl);
-            _Logger.LogInformation("Удалён сотрудник: {0}", empl);
+            _Db.Entry(employee).State = EntityState.Deleted;
+            _Db.SaveChanges();
+
+            _Logger.LogInformation("Удалён сотрудник: {0}", employee);
 
             return true;
         }
-
-        private int _CurrentMaxId = TestData.Employees.Count;
-        private int GetNextId() => ++_CurrentMaxId;
     }
 }

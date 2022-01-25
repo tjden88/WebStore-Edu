@@ -3,7 +3,6 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Services;
-using WebStore_Edu.Services.InMemory;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
 
@@ -22,7 +21,7 @@ services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddScoped<IEmployeesData, InMemoryEmployeesData>();
+services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
 

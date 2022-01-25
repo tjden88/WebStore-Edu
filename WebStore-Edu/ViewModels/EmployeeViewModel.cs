@@ -31,7 +31,7 @@ namespace WebStore_Edu.ViewModels
 
         [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
         [Display(Name = "Дата рождения")]
-        public DateTime Birthday { get; set; }
+        public DateTime Birthday { get; set; } = DateTime.Now.AddYears(-20);
 
         //[Range(18,150)] // Ограничение числовых данных
         [Display(Name = "Возраст")]
