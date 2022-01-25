@@ -13,7 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\WebStore-Edu.Domain\WebStore-Edu.Domain.csproj" />
+	  <ProjectReference Include="..\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
 	</ItemGroup>
 
 
