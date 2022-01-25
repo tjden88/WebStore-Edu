@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.Entityes;
 
 namespace WebStore_Edu.Services.Interfaces
@@ -15,6 +11,8 @@ namespace WebStore_Edu.Services.Interfaces
         /// <summary> Получить все бренды </summary>
         IEnumerable<Brand> GetBrands();
 
+        /// <summary> Получить данные товаров с фильтром </summary>
+        IEnumerable<Product> GetProducts(ProductFilter? filter = null);
 
     }
 }
