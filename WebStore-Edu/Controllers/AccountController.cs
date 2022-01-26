@@ -18,7 +18,7 @@ namespace WebStore_Edu.Controllers
 
         public IActionResult Authorize() => View();
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
         {
             if (!ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace WebStore_Edu.Controllers
             return View(Model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginUserViewModel Model)
         {
             if (!ModelState.IsValid)

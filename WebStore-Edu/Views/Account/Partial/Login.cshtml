@@ -4,7 +4,7 @@
 <div class="login-form">
     <!--login form-->
 
-    <form asp-action="Login" asp-controller="Account">
+    <form asp-action="Login" asp-controller="Account" asp-antiforgery="true">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <span asp-validation-for="UserName" class="text-danger"></span>

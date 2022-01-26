@@ -3,7 +3,7 @@
 <h2>Регистрация нового пользователя</h2>
 <div class="signup-form">
     <!--sign up form-->
-    <form asp-action="Register" asp-controller="Account">
+    <form asp-action="Register" asp-controller="Account", asp-antiforgery="true">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <span asp-validation-for="UserName" class="text-danger"></span>
