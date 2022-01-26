@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore-Edu", "WebStore-Ed
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore-Edu.Domain", "WebStore-Edu.Domain\WebStore-Edu.Domain.csproj", "{64AC61DE-E6C6-42EF-98DB-0341E841C142}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore-Edu.DAL", "WebStore-Edu.DAL\WebStore-Edu.DAL.csproj", "{4EAF0464-2C4D-4845-9E31-8D941821293E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore-Edu.DAL", "WebStore-Edu.DAL\WebStore-Edu.DAL.csproj", "{4EAF0464-2C4D-4845-9E31-8D941821293E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
