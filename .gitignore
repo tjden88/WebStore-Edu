@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WebStore-Edu/wwwroot/js/site.min.js.map
+/WebStore-Edu/wwwroot/js/site.min.js.gz
+/WebStore-Edu/wwwroot/js/site.min.js
+/WebStore-Edu/wwwroot/js/site.js
+/WebStore-Edu/wwwroot/css/site.min.css
+/WebStore-Edu/wwwroot/css/site.css
