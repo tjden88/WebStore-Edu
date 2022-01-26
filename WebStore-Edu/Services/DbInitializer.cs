@@ -96,10 +96,10 @@ namespace WebStore_Edu.Services
             _Logger.LogInformation("Добавление сотрудников...");
             await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
-                await _Db.Employees.AddRangeAsync(TestData.Employees, Cancel).ConfigureAwait(false);
-                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] ON", Cancel);
+                var employees = TestData.Employees;
+                employees.ForEach(e => e.Id = 0);
+                await _Db.Employees.AddRangeAsync(employees, Cancel).ConfigureAwait(false);
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
-                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] OFF", Cancel);
                 await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление сотрудников выполнено");
