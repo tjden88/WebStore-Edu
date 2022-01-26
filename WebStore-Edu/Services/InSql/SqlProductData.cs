@@ -1,4 +1,5 @@
-﻿using WebStore_Edu.DAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
@@ -31,5 +32,11 @@ namespace WebStore_Edu.Services.InSql
             return query;
 
         }
+
+        public Product? GetProduct(int Id) =>
+            _Db.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Section)
+                .FirstOrDefault(p => p.Id == Id);
     }
 }

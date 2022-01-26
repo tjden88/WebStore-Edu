@@ -14,5 +14,7 @@ namespace WebStore_Edu.Services.Interfaces
         /// <summary> Получить данные товаров с фильтром </summary>
         IEnumerable<Product> GetProducts(ProductFilter? filter = null);
 
+        Product? GetProduct(int Id);
+
     }
 }

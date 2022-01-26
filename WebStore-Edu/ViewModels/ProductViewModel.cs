@@ -1,4 +1,6 @@
-﻿namespace WebStore_Edu.ViewModels
+﻿using WebStore_Edu.Domain.Entityes;
+
+namespace WebStore_Edu.ViewModels
 {
     public class ProductViewModel
     {
@@ -11,5 +13,9 @@
 
         /// <summary>Путь к картинке</summary>
         public string ImageUrl { get; set; }
+
+        public string Section { get; set; }
+
+        public string? Brand { get; set; }
     }
 }
