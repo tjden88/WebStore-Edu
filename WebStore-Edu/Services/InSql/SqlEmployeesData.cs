@@ -20,9 +20,9 @@ namespace WebStore_Edu.Services.InSql
             _Logger = Logger;
         }
 
-        public IEnumerable<Employee> GetAll() => _Db.Employees;
+        public IEnumerable<Employee> GetAll() => _Db.Employees.AsEnumerable();
 
-        public Employee? GetById(int Id) => _Db.Employees.FirstOrDefault(e => e.Id == Id);
+        public Employee? GetById(int Id) => _Db.Employees.Find(Id);
 
         public int Add(Employee employee)
         {
@@ -56,7 +56,11 @@ namespace WebStore_Edu.Services.InSql
 
         public bool Delete(int Id)
         {
-            if (GetById(Id) is not { } employee)
+            var employee = _Db.Employees
+                .Select(e => new Employee {Id = e.Id})
+                .FirstOrDefault(e => e.Id == Id);
+
+            if (employee is null)
             {
                 _Logger.LogWarning("Попытка удалить несуществующего сотрудника с id:{0}", Id);
                 return false;

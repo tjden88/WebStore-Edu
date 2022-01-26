@@ -1,7 +1,9 @@
 using Mapster;
 using MapsterMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
+using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
@@ -24,6 +26,39 @@ services.AddScoped<IMapper, ServiceMapper>();
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
+
+services.AddIdentity<User, Role>() // Identity
+    .AddEntityFrameworkStores<WebStoreDb>()
+    .AddDefaultTokenProviders();
+
+services.Configure<IdentityOptions>(opt =>
+{
+#if DEBUG
+    opt.Password.RequireDigit = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireUppercase = false;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequiredLength = 3;
+    opt.Password.RequiredUniqueChars = 3;
+#endif
+
+    opt.User.RequireUniqueEmail = false;
+
+    opt.Lockout.AllowedForNewUsers = false;
+    opt.Lockout.MaxFailedAccessAttempts = 10;
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+});
+
+services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.Name = "WebStore-Edu";
+    opt.Cookie.HttpOnly = true;
+    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+    opt.LoginPath = "/Account/Login";
+    opt.AccessDeniedPath = "/Account/AccessDenied";
+
+    opt.SlidingExpiration = true;
+});
 
 // Add db
 services.AddDbContext<WebStoreDb>(opt =>
@@ -53,6 +88,10 @@ app.Use(async (context, next) => // 404 страница для всех нев�
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapDefaultControllerRoute(); // Home Controller
 
