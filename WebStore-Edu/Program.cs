@@ -3,10 +3,12 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
+using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.ViewModels;
 
 
 #region Построение приложения
@@ -19,6 +21,14 @@ services.AddControllersWithViews();
 
 // Mapster
 var config = new TypeAdapterConfig();
+
+config.ForType<Product, ProductViewModel>()
+    .Map(dest => dest.Section,
+        src => src.Section.Name)
+    .Map(dest => dest.Brand,
+        src => src.Brand.Name).Compile();
+
+
 services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
