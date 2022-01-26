@@ -60,9 +60,26 @@ namespace WebStore_Edu.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(LoginUserViewModel Model)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View(Model);
+
+
+            var loginResult = await _SignInManager.PasswordSignInAsync(
+                Model.UserName,
+                Model.Password,
+                Model.Remember,
+                false);
+
+            if (loginResult.Succeeded)
+            {
+                return LocalRedirect(Model.RedirectUrl ?? "/");
+            }
+
+            ModelState.AddModelError("", "Неверное имя пользователя или пароль");
+
+            return View(Model);
         }
 
         public IActionResult Logout() => RedirectToAction("Index", "Home");
