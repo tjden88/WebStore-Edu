@@ -75,15 +75,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
-app.Use(async (context, next) => // 404 страница для всех неверных адресов
-{
-    await next();
-    if (context.Response.StatusCode == 404)
-    {
-        context.Request.Path = "/Home/NotFoundPage";
-        await next();
-    }
-});
+//app.Use(async (context, next) => // 404 страница для всех неверных адресов
+//{
+//    await next();
+//    if (context.Response.StatusCode == 404)
+//    {
+//        context.Request.Path = "/Home/NotFoundPage";
+//        await next();
+//    }
+//});
+app.UseStatusCodePagesWithRedirects("/Error/{0}"); // 404 страница для всех неверных адресов вариант 2
 
 app.UseStaticFiles();
 
