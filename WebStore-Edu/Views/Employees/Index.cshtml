@@ -1,3 +1,4 @@
+@using WebStore_Edu.Domain.Identity
 @model IEnumerable<EmployeeViewModel>
 
 @{
@@ -31,9 +32,12 @@
                         <div class="fa fa-info">
                             <a asp-controller="Employees" asp-action="EmployeeInfo" asp-route-id="@empl.Id">Подробно</a>
                         </div>
-                        <div class="fa fa-edit">
-                            <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
-                        </div>
+                        @if (User.IsInRole(Role.Administrators))
+                        {
+                            <div class="fa fa-edit">
+                                <a asp-controller="Employees" asp-action="EmployeeEdit" asp-route-id="@empl.Id">Изменить</a>
+                            </div>
+                        }
                     </td>
                 </tr>
             }
@@ -46,5 +50,8 @@ else
     <p>Сотрудников нет...</p>
 }
 <hr />
-<a class="btn btn-info" asp-action="EmployeeEdit">Добавить сотрудника</a>
+@if (User.IsInRole(Role.Administrators))
+{
+    <a class="btn btn-info" asp-action="EmployeeEdit">Добавить сотрудника</a>
+}
 <a asp-controller="Home" asp-action="Index">Домой</a>
