@@ -32,6 +32,7 @@ namespace WebStore_Edu.Controllers
             var registrationResult = await _UserManager.CreateAsync(user, Model.Password);
             if (registrationResult.Succeeded)
             {
+                await _UserManager.AddToRoleAsync(user, Role.Users);
                 await _SignInManager.SignInAsync(user, true);
                 return RedirectToAction("Index", "Home");
             }
