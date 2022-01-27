@@ -1,4 +1,6 @@
-﻿namespace WebStore_Edu.Services.Interfaces
+﻿using WebStore_Edu.ViewModels;
+
+namespace WebStore_Edu.Services.Interfaces
 {
     public interface ICartService
     {
@@ -9,5 +11,7 @@
         void Remove(int Id);
 
         void Clear();
+
+        CartViewModel CreateViewModel();
     }
 }
