@@ -18,8 +18,8 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a asp-controller="Home" asp-action="Index">На главную</a></li>
-                <li class="active">Shopping Корзина</li>
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">Корзина</li>
             </ol>
         </div>
         <div class="table-responsive cart_info">
@@ -50,16 +50,16 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <a class="cart_quantity_up" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="1"> + </a>
                                     <input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
+                                    <a class="cart_quantity_down" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="-1"> - </a>
                                 </div>
                             </td>
                             <td class="cart_total">
                                 <p class="cart_total_price">@(item.Quantity * item.Product.Price)</p>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                <a class="cart_quantity_delete" asp-action="Remove" asp-route-Id="@item.Product.Id"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     }

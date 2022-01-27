@@ -15,5 +15,23 @@ namespace WebStore_Edu.Controllers
         {
             return View(_CartService.CreateViewModel());
         }
+
+        public IActionResult Add(int Id, int Quantity = 1)
+        {
+            _CartService.Add(Id, Quantity);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int Id)
+        {
+            _CartService.Remove(Id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Clear()
+        {
+            _CartService.Clear();
+            return RedirectToAction("Index");
+        }
     }
 }

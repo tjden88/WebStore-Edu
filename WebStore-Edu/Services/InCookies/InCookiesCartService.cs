@@ -56,7 +56,11 @@ namespace WebStore_Edu.Services.InCookies
             }
             else
             {
-                item.Quantity++;
+                item.Quantity += Quantity;
+
+                if (item.Quantity < 1)
+                    cart.Items.Remove(item);
+
             }
             SetUserCart(cart);
         }
