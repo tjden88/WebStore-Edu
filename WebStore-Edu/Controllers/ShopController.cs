@@ -41,9 +41,15 @@ namespace WebStore_Edu.Controllers
             return View(model);
         }
 
-        public IActionResult ProductDetails() => View();
+        public IActionResult ProductDetails(int Id)
+        {
+            var product = _ProductData.GetProduct(Id);
+            if (product is null)
+                return NotFound();
+
+            return View(_Mapper.Map<ProductViewModel>(product));
+        }
+
         public IActionResult Checkout() => View();
-        public IActionResult Cart() => View();
-        public IActionResult Login() => View();
     }
 }

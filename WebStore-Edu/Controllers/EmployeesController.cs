@@ -1,11 +1,14 @@
 ﻿using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Entityes;
+using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IMapper _Mapper;
@@ -30,7 +33,7 @@ namespace WebStore_Edu.Controllers
             return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
-
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult EmployeeEdit(int? Id)
         {
             if (Id is null)
@@ -45,7 +48,7 @@ namespace WebStore_Edu.Controllers
             return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
-
+        [Authorize(Roles = Role.Administrators)]
         [HttpPost]
         public IActionResult EmployeeEdit(EmployeeViewModel model)
         {
@@ -68,7 +71,7 @@ namespace WebStore_Edu.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult DeleteQuestion(int Id)
         {
             var empl = _EmployeesData.GetById(Id);
@@ -79,7 +82,7 @@ namespace WebStore_Edu.Controllers
             return View(_Mapper.Map<EmployeeViewModel>(empl));
         }
 
-
+        [Authorize(Roles = Role.Administrators)]
         [HttpPost]
         public IActionResult DeleteEmployee(int Id)
         {

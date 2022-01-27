@@ -1,6 +1,5 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
-using WebStore_Edu.Data;
 using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
 
@@ -18,6 +17,18 @@ namespace WebStore_Edu.Controllers
         }
 
         public IActionResult NotFoundPage() => View();
+
+        [Route("Error/{Code}")]
+        public IActionResult Error(int Code)
+        {
+            if (Code == 404)
+            {
+                return View("NotFoundPage");
+            }
+
+            return StatusCode(Code);
+        }
+
         public IActionResult Contacts() => View();
     }
 }

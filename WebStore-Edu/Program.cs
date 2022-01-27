@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services;
+using WebStore_Edu.Services.InCookies;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.ViewModels;
 
 
 #region Построение приложения
@@ -19,6 +21,9 @@ services.AddControllersWithViews();
 
 // Mapster
 var config = new TypeAdapterConfig();
+
+config.ConfigureViewModels();
+
 services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
@@ -26,6 +31,7 @@ services.AddScoped<IMapper, ServiceMapper>();
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
+services.AddScoped<ICartService, InCookiesCartService>();
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
@@ -54,7 +60,7 @@ services.ConfigureApplicationCookie(opt =>
     opt.Cookie.Name = "WebStore-Edu";
     opt.Cookie.HttpOnly = true;
     opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-    opt.LoginPath = "/Account/Login";
+    opt.LoginPath = "/Account/Authorize";
     opt.AccessDeniedPath = "/Account/AccessDenied";
 
     opt.SlidingExpiration = true;
@@ -75,15 +81,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
-app.Use(async (context, next) => // 404 страница для всех неверных адресов
-{
-    await next();
-    if (context.Response.StatusCode == 404)
-    {
-        context.Request.Path = "/Home/NotFoundPage";
-        await next();
-    }
-});
+//app.Use(async (context, next) => // 404 страница для всех неверных адресов
+//{
+//    await next();
+//    if (context.Response.StatusCode == 404)
+//    {
+//        context.Request.Path = "/Home/NotFoundPage";
+//        await next();
+//    }
+//});
+app.UseStatusCodePagesWithRedirects("/Error/{0}"); // 404 страница для всех неверных адресов вариант 2
 
 app.UseStaticFiles();
 

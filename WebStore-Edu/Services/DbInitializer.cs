@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Data;
+using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services.Interfaces;
 
 namespace WebStore_Edu.Services
@@ -9,11 +11,15 @@ namespace WebStore_Edu.Services
     {
         private readonly WebStoreDb _Db;
         private readonly ILogger<DbInitializer> _Logger;
+        private readonly UserManager<User> _UserManager;
+        private readonly RoleManager<Role> _RoleManager;
 
-        public DbInitializer(WebStoreDb Db, ILogger<DbInitializer> Logger)
+        public DbInitializer(WebStoreDb Db, ILogger<DbInitializer> Logger, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _Db = Db;
             _Logger = Logger;
+            _UserManager = userManager;
+            _RoleManager = roleManager;
         }
 
         public async Task InitializeAsync(bool RemoveBefore = false, CancellationToken Cancel = default)
@@ -33,6 +39,8 @@ namespace WebStore_Edu.Services
 
             await InitializeStartDataAsync(Cancel).ConfigureAwait(false);
 
+            await InitializeUsersRoles(Cancel).ConfigureAwait(false);
+
             _Logger.LogInformation("Инициализация БД выполнена");
         }
 
@@ -47,7 +55,6 @@ namespace WebStore_Edu.Services
 
             return result;
         }
-
 
         private async Task InitializeStartDataAsync(CancellationToken Cancel)
         {
@@ -105,5 +112,47 @@ namespace WebStore_Edu.Services
             _Logger.LogInformation("Добавление сотрудников выполнено");
 
         }
+
+        private async Task InitializeUsersRoles(CancellationToken Cancel)
+        {
+            _Logger.LogInformation("Инициализация ролей пользователей...");
+
+            async Task CheckRole(string RoleName)
+            {
+                if (!await _RoleManager.RoleExistsAsync(RoleName))
+                {
+                    _Logger.LogInformation("Добавление роли {0}", RoleName);
+                    await _RoleManager.CreateAsync(new Role() { Name = RoleName });
+                    _Logger.LogInformation("Роль {0} добавлена", RoleName);
+                }
+
+            }
+
+            await CheckRole(Role.Administrators);
+            await CheckRole(Role.Users);
+
+            if (await _UserManager.FindByNameAsync(User.Administrator) is null)
+            {
+                _Logger.LogInformation("Добавление администратора");
+                var admin = new User()
+                {
+                    UserName = User.Administrator
+                };
+
+                var adminCreateResult = await _UserManager.CreateAsync(admin, User.DefaultAdminPassword);
+
+                if (!adminCreateResult.Succeeded)
+                {
+                    var errors = String.Join(", ", adminCreateResult.Errors.Select(e => e.Description));
+                    _Logger.LogError("Не удалось создать учётную запись администратора! {0}", errors);
+                    throw new InvalidOperationException($"Не удалось создать учётную запись администратора! Ошибки: {errors}");
+                }
+
+                await _UserManager.AddToRoleAsync(admin, Role.Administrators);
+
+                _Logger.LogWarning("Администратор добавлен с паролем по умолчанию");
+            }
+        }
+
     }
 }

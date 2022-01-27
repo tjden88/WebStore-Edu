@@ -1,4 +1,5 @@
-﻿using WebStore_Edu.DAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Services.Interfaces;
@@ -17,19 +18,38 @@ namespace WebStore_Edu.Services.InSql
 
         public IEnumerable<Product> GetProducts(ProductFilter? filter = null)
         {
-            IQueryable<Product> query = _Db.Products;
+            IQueryable<Product> query = _Db.Products
+                    .Include(p => p.Brand)
+                    .Include(p => p.Section)
+                ;
 
-            if (filter?.SectionId is { } section)
+            if (filter is not null)
             {
-                query = query.Where(p => p.SectionId == section);
+                if (filter.SectionId is { } section)
+                {
+                    query = query.Where(p => p.SectionId == section);
+                }
+                if (filter.BrandId is { } brand)
+                {
+                    query = query.Where(p => p.BrandId == brand);
+                }
+
+                if (filter.Ids is { } ids)
+                {
+                    query = query.Where(p => filter.Ids.Contains(p.Id));
+                }
             }
-            if (filter?.BrandId is { } brand)
-            {
-                query = query.Where(p => p.BrandId == brand);
-            }
+
+
 
             return query;
 
         }
+
+        public Product? GetProduct(int Id) =>
+            _Db.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Section)
+                .FirstOrDefault(p => p.Id == Id);
     }
 }
