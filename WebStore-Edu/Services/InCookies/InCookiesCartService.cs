@@ -9,13 +9,13 @@ namespace WebStore_Edu.Services.InCookies
 {
     public class InCookiesCartService : ICartService
     {
-        private readonly HttpContextAccessor _HttpContextAccessor;
+        private readonly IHttpContextAccessor _HttpContextAccessor;
         private readonly IProductData _ProductData;
         private readonly IMapper _Mapper;
 
         private readonly string _CookieCartName;
 
-        public InCookiesCartService(HttpContextAccessor httpContextAccessor, IProductData ProductData, IMapper Mapper)
+        public InCookiesCartService(IHttpContextAccessor httpContextAccessor, IProductData ProductData, IMapper Mapper)
         {
             _HttpContextAccessor = httpContextAccessor;
             _ProductData = ProductData;

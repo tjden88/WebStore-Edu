@@ -51,7 +51,5 @@ namespace WebStore_Edu.Controllers
         }
 
         public IActionResult Checkout() => View();
-        public IActionResult Cart() => View();
-        public IActionResult Login() => View();
     }
 }

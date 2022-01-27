@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Services;
+using WebStore_Edu.Services.InCookies;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
@@ -30,6 +31,7 @@ services.AddScoped<IMapper, ServiceMapper>();
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
+services.AddScoped<ICartService, InCookiesCartService>();
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
