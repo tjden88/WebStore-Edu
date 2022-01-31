@@ -7,6 +7,14 @@
     <li><a asp-controller="Account" asp-action="Authorize"><i class="fa fa-user"></i> @User.Identity!.Name</a></li>
     <li><a href="#"><i class="fa fa-star"></i> Список желаний</a></li>
     <li><a asp-controller="Shop" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Оформить заказ</a></li>
-    <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+    <li>
+        <a asp-controller="Cart" asp-action="Index">
+            <i class="fa fa-shopping-cart"></i> Корзина
+            @if (ViewBag.CartCount > 0)
+            {
+                <text> (Товаров: @ViewBag.CartCount)</text>
+            }
+        </a>
+    </li>
     <li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-lock"></i> Выход</a></li>
 </ul>

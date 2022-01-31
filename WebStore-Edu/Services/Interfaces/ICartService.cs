@@ -13,5 +13,7 @@ namespace WebStore_Edu.Services.Interfaces
         void Clear();
 
         CartViewModel CreateViewModel();
+
+        int ProductsCount();
     }
 }
