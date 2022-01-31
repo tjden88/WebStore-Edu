@@ -16,10 +16,12 @@ namespace WebStore_Edu.Controllers
             return View(_CartService.CreateViewModel());
         }
 
-        public IActionResult Add(int Id, int Quantity = 1)
+        public IActionResult Add(int Id, int Quantity = 1, string? ReturnUrl = null)
         {
             _CartService.Add(Id, Quantity);
-            return RedirectToAction("Index");
+            return ReturnUrl is null 
+                ? RedirectToAction("Index")
+                : LocalRedirect(ReturnUrl);
         }
 
         public IActionResult Remove(int Id)

@@ -58,15 +58,19 @@
                         <img src="~/images/product-details/new.jpg" class="newarrival" alt="" />
                         <h2>@Model.Name</h2>
                         <p>Артикул: @Model.Id.ToString("000000")</p>
-                        <img src="~/images/product-details/rating.png" alt="" />
-                        <span>
-                            <span>@Model.Price.ToString("C")</span>
-                            <label>Количество:</label>
-                            <input type="text" name="Quantity" value="1" />
-                            <a type="button" class="btn btn-default cart" asp-controller="Cart" asp-action="Add" asp-route-Id="@Model.Id">
-                                <i class="fa fa-shopping-cart"></i>
-                                В корзину
-                            </a>
+                                 <img src="~/images/product-details/rating.png" alt="" />
+                       <span>
+                            <form asp-controller="Cart" asp-action="Add" asp-route-Id="@Model.Id">
+                                <span>@Model.Price.ToString("C")</span>
+                                <label>Количество:</label>
+                                <input type="text" name="Quantity" value="1" />
+                                <input name="ReturnUrl" class="hidden" value="@Context.Request.Path"/>
+
+                                <button type="submit" class="btn btn-default cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    В корзину
+                                </button>
+                            </form>
                         </span>
                         <p><b>Доступность:</b> На складе</p>
                         <p><b>Состояние:</b> Новое</p>
@@ -78,7 +82,7 @@
             </div><!--/product-details-->
 
             <div class="category-tab shop-details-tab">
-                <partial name="Partial/_CategoryTab"/>
+                <partial name="Partial/_CategoryTab" />
             </div><!--/category-tab-->
 
             <partial name="Partial/_Recomended" />
