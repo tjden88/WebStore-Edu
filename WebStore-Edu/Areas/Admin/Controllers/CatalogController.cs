@@ -23,5 +23,32 @@ namespace WebStore_Edu.Areas.Admin.Controllers
             var products = _ProductData.GetProducts();
             return View(_Mapper.Map<IEnumerable<ProductViewModel>>(products));
         }
+
+        public IActionResult Edit(int Id)
+        {
+            var product = _ProductData.GetProduct(Id);
+            if (product is null)
+                return NotFound();
+
+            return View(_Mapper.Map<ProductViewModel>(product));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel model)
+        {
+            // Изменить товар в сервисе TODO: не доработано
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete(int Id)
+        {
+            var removed = _ProductData.Remove(Id);
+            if (!removed)
+                return NotFound();
+            return RedirectToAction("Index");
+        }
     }
 }

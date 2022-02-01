@@ -16,5 +16,7 @@ namespace WebStore_Edu.Services.Interfaces
 
         Product? GetProduct(int Id);
 
+        bool Remove(int Id);
+
     }
 }
