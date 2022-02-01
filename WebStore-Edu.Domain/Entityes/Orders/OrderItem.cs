@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebStore_Edu.Domain.Entityes.Base;
 
 namespace WebStore_Edu.Domain.Entityes.Orders;
 
-public class OrderItem
+public class OrderItem : Entity
 {
     [Required]
     public Product Product { get; set; }

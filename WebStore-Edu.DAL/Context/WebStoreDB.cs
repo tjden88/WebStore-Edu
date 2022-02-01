@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.Domain.Entityes;
+using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.Identity;
 
 namespace WebStore_Edu.DAL.Context
@@ -18,5 +19,7 @@ namespace WebStore_Edu.DAL.Context
         public DbSet<Section> Sections { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }
