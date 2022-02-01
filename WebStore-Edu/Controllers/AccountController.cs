@@ -17,6 +17,8 @@ namespace WebStore_Edu.Controllers
         }
 
         public IActionResult Authorize() => View();
+        public IActionResult Login(string ReturnUrl) => View(new LoginUserViewModel(){ReturnUrl = ReturnUrl});
+        public IActionResult Register() => View(new RegisterUserViewModel());
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
@@ -75,7 +77,7 @@ namespace WebStore_Edu.Controllers
 
             if (loginResult.Succeeded)
             {
-                return LocalRedirect(Model.RedirectUrl ?? "/");
+                return LocalRedirect(Model.ReturnUrl ?? "/");
             }
 
             ModelState.AddModelError("", "Неверное имя пользователя или пароль");
