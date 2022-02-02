@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebStore_Edu.Domain.ViewModels.ProductViewModel>
+
+<div class="features_items">
+    <!--features_items-->
+    <h2 class="title text-center">Товары</h2>
+    @if (@Model.Any())
+    {
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="~/images/shop/@product.ImageUrl" alt="" />
+                            <h2>@product.Price.ToString("C")</h2>
+                            <p><a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@product.Id">@product.Name</a></p>
+                            <a asp-controller="Cart" asp-action="Add" asp-route-Id="@product.Id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>@product.Price.ToString("C")</h2>
+                                <p><a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@product.Id">@product.Name</a></p>
+                                <a asp-controller="Cart" asp-action="Add" asp-route-Id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Добавить в желания</a></li>
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Добавить к сравнению</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center">Подходящих товаров сейчас нет...</div>
+    }
+
+
+</div><!--features_items-->

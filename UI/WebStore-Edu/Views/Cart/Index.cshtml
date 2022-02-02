@@ -1,0 +1,89 @@
+﻿@using WebStore_Edu.Domain.ViewModels
+@model WebStore_Edu.Domain.ViewModels.CartViewModel
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+@if (!Model.Items.Any())
+{
+    <div class="text-center">
+        <h2>Корзина пуста</h2>
+    </div>
+    return;
+}
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="active">Корзина</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Товар</td>
+                        <td class="description"></td>
+                        <td class="price">Цена</td>
+                        <td class="quantity">Кол-во.</td>
+                        <td class="total">Итого</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ((ProductViewModel Product, int Quantity) item in Model.Items)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                <a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@item.Product.Id"><img src="~/images/shop/@item.Product.ImageUrl" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@item.Product.Id">@item.Product.Name</a></h4>
+                                <p>Артикул: @item.Product.Id.ToString("00000")</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@item.Product.Price.ToString("C")</p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="1"> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="-1"> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@(item.Quantity * item.Product.Price)</p>
+                            </td>
+                            <td class="cart_delete">
+                                <a class="cart_quantity_delete" asp-action="Remove" asp-route-Id="@item.Product.Id"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#cart_items-->
+
+<section id="do_action">
+    <div class="container">
+        <div class="heading">
+            <h3>Что мы сделаем с этим дальше?</h3>
+            <p>Выберите, есть ли у вас код скидки или бонусные баллы, которые вы хотите использовать или хотите сделать скидку на доставку.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="total_area">
+                    <ul>
+                        <li>Стоимость доставки <span>Бесплатно</span></li>
+                        <li>Итого <span>@Model.TotalPrice.ToString("C")</span></li>
+                    </ul>
+                        <a class="btn btn-default update" asp-action="Checkout">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/#do_action-->
