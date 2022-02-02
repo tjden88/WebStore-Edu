@@ -5,15 +5,17 @@ namespace WebStore_Edu.ViewModels
 {
     public class OrderVievModel
     {
-        [Microsoft.Build.Framework.Required]
+        [Required]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        [Microsoft.Build.Framework.Required]
+        [Required]
         public string Address { get; set; }
 
         public string Notes { get; set; }
 
-        User User { get; set; }
+        public User User { get; set; }
+
+        public CartViewModel Cart { get; set; }
     }
 }
