@@ -368,3 +368,5 @@ FodyWeavers.xsd
 /WebStore-Edu/wwwroot/css/site.min.css
 /WebStore-Edu/wwwroot/css/site.css
 *.db
+*.db-shm
+*.db-wal
