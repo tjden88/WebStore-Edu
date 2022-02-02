@@ -25,7 +25,7 @@ namespace WebSore_Edu.WebAPI.Controllers
             return Ok(employee);
         }
 
-        [HttpPost("{Employee}")]
+        [HttpPost]
         public IActionResult Add(Employee Employee)
         {
             var id = _EmployeesData.Add(Employee);
@@ -34,7 +34,7 @@ namespace WebSore_Edu.WebAPI.Controllers
         }
 
 
-        [HttpPut("{Id}")]
+        [HttpPut]
         public IActionResult Update(Employee Employee)
         {
             var result = _EmployeesData.Update(Employee);
