@@ -46,6 +46,8 @@ namespace WebStore_Edu.Services.InSql
 
         public async Task<Order> CreateOrderAsync(CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default)
         {
+            await using var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false);
+
             var order = _Mapper.Map<Order>(OrderModel);
 
             var prodIds = Cart.Items.Select(i => i.Product.Id);
@@ -72,6 +74,8 @@ namespace WebStore_Edu.Services.InSql
             await _Db.Orders.AddAsync(order, Cancel).ConfigureAwait(false);
 
             await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+
+            await transaction.CommitAsync(Cancel).ConfigureAwait(false);
 
             return order;
         }
