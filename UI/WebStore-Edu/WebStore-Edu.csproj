@@ -18,13 +18,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
-	  <ProjectReference Include="..\WebStore.DAL.SqLite\WebStore-Edu.DAL.SqLite.csproj" />
+	  <Folder Include="Areas\Admin\Data\" />
+	  <Folder Include="Areas\Admin\Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Areas\Admin\Data\" />
-	  <Folder Include="Areas\Admin\Models\" />
+	  <ProjectReference Include="..\..\Data\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
+	  <ProjectReference Include="..\..\Data\WebStore.DAL.SqLite\WebStore-Edu.DAL.SqLite.csproj" />
 	</ItemGroup>
 
 
