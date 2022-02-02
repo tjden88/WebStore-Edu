@@ -28,6 +28,8 @@ namespace WebStore_Edu.Services
 
             _Logger.LogInformation("Инициализация БД...");
 
+            await _Db.Database.ExecuteSqlRawAsync("PRAGMA journal_mode=DELETE;", Cancel).ConfigureAwait(false);
+
             var pendingMigrations = await _Db.Database.GetPendingMigrationsAsync(Cancel).ConfigureAwait(false);
             if (pendingMigrations.Any())
             {
