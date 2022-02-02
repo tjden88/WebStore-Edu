@@ -1,11 +1,12 @@
 ﻿using MapsterMapper;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Domain.ViewModels;
-using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.Interfaces.Services;
 
-namespace WebStore_Edu.Services.InCookies
+namespace WebStore_Edu.Services.Services.InCookies
 {
     public class InCookiesCartService : ICartService
     {

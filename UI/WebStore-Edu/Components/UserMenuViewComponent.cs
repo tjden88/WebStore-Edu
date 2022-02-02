@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.Interfaces.Services;
 
 namespace WebStore_Edu.Components
 {

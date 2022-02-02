@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
+using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Services;
-using WebStore_Edu.Services.InCookies;
-using WebStore_Edu.Services.InSql;
-using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.Services.Services;
+using WebStore_Edu.Services.Services.InCookies;
+using WebStore_Edu.Services.Services.InSql;
 
 
 #region Построение приложения

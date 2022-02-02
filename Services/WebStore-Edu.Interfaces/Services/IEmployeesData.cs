@@ -1,6 +1,6 @@
 ﻿using WebStore_Edu.Domain.Entityes;
 
-namespace WebStore_Edu.Services.Interfaces
+namespace WebStore_Edu.Interfaces.Services
 {
     public interface IEmployeesData
     {

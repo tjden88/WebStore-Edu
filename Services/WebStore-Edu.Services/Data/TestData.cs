@@ -1,6 +1,6 @@
 ﻿using WebStore_Edu.Domain.Entityes;
 
-namespace WebStore_Edu.Data
+namespace WebStore_Edu.Services.Data
 {
     /// <summary> Тестовые данные </summary>
     public static class TestData

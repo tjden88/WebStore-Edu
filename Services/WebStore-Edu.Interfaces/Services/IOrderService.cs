@@ -2,7 +2,7 @@
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 
-namespace WebStore_Edu.Services.Interfaces
+namespace WebStore_Edu.Interfaces.Services
 {
     public interface IOrderService
     {

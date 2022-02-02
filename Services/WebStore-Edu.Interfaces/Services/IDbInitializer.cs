@@ -1,4 +1,4 @@
-﻿namespace WebStore_Edu.Services.Interfaces
+﻿namespace WebStore_Edu.Interfaces.Services
 {
     /// <summary>
     /// Инициализатор БД

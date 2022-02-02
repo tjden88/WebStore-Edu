@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WebStore_Edu.DAL.Context;
-using WebStore_Edu.Data;
 using WebStore_Edu.Domain.Identity;
-using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.Interfaces.Services;
+using WebStore_Edu.Services.Data;
 
-namespace WebStore_Edu.Services
+namespace WebStore_Edu.Services.Services
 {
-    public class SqLiteDbInitializer: IDbInitializer
+    public class SqlServerDbInitializer : IDbInitializer
     {
         private readonly WebStoreDb _Db;
-        private readonly ILogger<SqLiteDbInitializer> _Logger;
+        private readonly ILogger<SqlServerDbInitializer> _Logger;
         private readonly UserManager<User> _UserManager;
         private readonly RoleManager<Role> _RoleManager;
 
-        public SqLiteDbInitializer(WebStoreDb Db, ILogger<SqLiteDbInitializer> Logger, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public SqlServerDbInitializer(WebStoreDb Db, ILogger<SqlServerDbInitializer> Logger, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _Db = Db;
             _Logger = Logger;
@@ -27,8 +28,6 @@ namespace WebStore_Edu.Services
             if (RemoveBefore) await RemoveAsync(Cancel).ConfigureAwait(false);
 
             _Logger.LogInformation("Инициализация БД...");
-
-            await _Db.Database.ExecuteSqlRawAsync("PRAGMA journal_mode=DELETE;", Cancel).ConfigureAwait(false);
 
             var pendingMigrations = await _Db.Database.GetPendingMigrationsAsync(Cancel).ConfigureAwait(false);
             if (pendingMigrations.Any())
@@ -71,7 +70,9 @@ namespace WebStore_Edu.Services
             await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Sections.AddRangeAsync(TestData.Sections, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON", Cancel); // TODO: плохо так делать
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF", Cancel);
                 await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление категорий товаров выполнено");
@@ -81,7 +82,9 @@ namespace WebStore_Edu.Services
             await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Brands.AddRangeAsync(TestData.Brands, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON", Cancel);
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF", Cancel);
                 await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление брендов выполнено");
@@ -91,7 +94,9 @@ namespace WebStore_Edu.Services
             await using (var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false))
             {
                 await _Db.Products.AddRangeAsync(TestData.Products, Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON", Cancel);
                 await _Db.SaveChangesAsync(Cancel).ConfigureAwait(false);
+                await _Db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF", Cancel);
                 await transaction.CommitAsync(Cancel).ConfigureAwait(false);
             }
             _Logger.LogInformation("Добавление товаров выполнено");

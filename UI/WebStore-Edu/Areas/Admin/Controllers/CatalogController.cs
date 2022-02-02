@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
-using WebStore_Edu.Services.Interfaces;
+using WebStore_Edu.Interfaces.Services;
 
 namespace WebStore_Edu.Areas.Admin.Controllers
 {
