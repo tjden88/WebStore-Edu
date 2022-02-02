@@ -1,7 +1,10 @@
+using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InSql;
@@ -12,6 +15,12 @@ var services = builder.Services;
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+
+// Mapster
+var config = new TypeAdapterConfig();
+config.ConfigureViewModels();
+services.AddSingleton(config);
+services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
 services.AddScoped<IEmployeesData, SqlEmployeesData>();

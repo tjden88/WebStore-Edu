@@ -10,6 +10,7 @@ using WebStore_Edu.Interfaces.TestApi;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.Services.Services.InSql;
+using WebStore_Edu.WebAPI.Clients.Employees;
 using WebStore_Edu.WebAPI.Clients.Values;
 
 
@@ -23,20 +24,18 @@ services.AddControllersWithViews();
 
 // Mapster
 var config = new TypeAdapterConfig();
-
 config.ConfigureViewModels();
-
 services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<ICartService, InCookiesCartService>();
 services.AddScoped<IOrderService, SqlOrderService>();
 
-services.AddHttpClient<IValuesApiService, ValuesClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["API"]));
+// WebClients
+services.AddHttpClient<IValuesApiService, ValuesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
+services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
