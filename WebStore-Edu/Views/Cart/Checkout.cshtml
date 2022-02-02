@@ -2,73 +2,78 @@
 
 @{
     ViewData["Title"] = "Оформление заказа";
+
+    if (!Model.Cart.Items.Any())
+    {
+        <div class="container">
+            <h2>Корзина пуста. Нечего оформлять...</h2>
+        </div>
+        return;
+    }
 }
 
-<section id="cart_items">
-    <div class="container">
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Оформление заказа</li>
-            </ol>
-        </div><!--/breadcrums-->
+<div class="container">
+    <div class="breadcrumbs">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Оформление заказа</li>
+        </ol>
+    </div><!--/breadcrums-->
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="shopper-info">
-                    <p>Инфрмация о покупателе</p>
-                    <partial name="Partial/_OrderCreation" model="@Model.Order"/>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="shopper-info">
-                    <p>Детали заказа</p>
-                </div>
-                <table>
-                    <thead>
-                        <tr class="cart_menu">
-                            <td class="image">Товар</td>
-                            <td class="description"></td>
-                            <td class="quantity">Количество</td>
-                            <td class="total">Сумма</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in @Model.Cart.Items)
-                        {
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="~/images/cart/one.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Артикул: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-
-                        }
-                    </tbody>
-                </table>
-
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="shopper-info">
+                <p>Инфрмация о покупателе</p>
+                <partial name="Partial/_OrderCreation" model="@Model.Order"/>
             </div>
         </div>
+        <div class="col-sm-8">
+            <div class="shopper-info">
+                <p>Детали заказа</p>
+            </div>
+            <table class="table">
+                <thead>
+                <tr class="cart_menu">
+                    <th>Товар</th>
+                    <th></th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in @Model.Cart.Items)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@item.Product.Id">
+                                <img height="80" src="~/images/shop/@item.Product.ImageUrl">
+                            </a>
+                        </td>
+                        <td class="cart_description">
+                            <h4>
+                                <a asp-controller="Shop" asp-action="ProductDetails" asp-route-Id="@item.Product.Id">
+                                    @item.Product.Name
+                                </a>
+                            </h4>
+                            <p>Артикул: @item.Product.Id.ToString("00000")</p>
+                        </td>
+                        <td>
+                            <p>@item.Quantity</p>
+                        </td>
+                        <td>
+                            <p>@((item.Product.Price * item.Quantity).ToString("C"))</p>
+                        </td>
+                    </tr>
 
-
+                }
+                </tbody>
+            </table>
+            <div>
+                <H4>Итого: @Model.Cart.TotalPrice.ToString("C")</H4>
+            </div>
+        </div>
     </div>
-</section> <!--/#cart_items-->
+
+
+</div>
+<!--/#cart_items-->
