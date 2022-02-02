@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EA3DF7F5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSore-Edu.WebAPI", "WebSore-Edu.WebAPI\WebSore-Edu.WebAPI.csproj", "{7A5AB787-C7E9-4773-BCC9-AD25941B082E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore-Edu.WebAPI.Clients", "Services\WebStore-Edu.WebAPI.Clients\WebStore-Edu.WebAPI.Clients.csproj", "{267438D5-85B0-4EF1-B9AE-F95682D90507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{7A5AB787-C7E9-4773-BCC9-AD25941B082E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A5AB787-C7E9-4773-BCC9-AD25941B082E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A5AB787-C7E9-4773-BCC9-AD25941B082E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267438D5-85B0-4EF1-B9AE-F95682D90507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267438D5-85B0-4EF1-B9AE-F95682D90507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267438D5-85B0-4EF1-B9AE-F95682D90507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267438D5-85B0-4EF1-B9AE-F95682D90507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{4A038561-D9F9-4372-9CBC-7B1E3E4D0E5F} = {95FD3DDA-F977-4CBC-8BB6-378CFE0BDB6F}
 		{2A5366F2-DF86-4E91-BA1A-996BC2992CA3} = {95FD3DDA-F977-4CBC-8BB6-378CFE0BDB6F}
 		{7A5AB787-C7E9-4773-BCC9-AD25941B082E} = {95FD3DDA-F977-4CBC-8BB6-378CFE0BDB6F}
+		{267438D5-85B0-4EF1-B9AE-F95682D90507} = {95FD3DDA-F977-4CBC-8BB6-378CFE0BDB6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C824C1F7-702E-4071-ACF2-492AC67A5544}

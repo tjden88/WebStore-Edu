@@ -1,14 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>WebStore_Edu.Interfaces</RootNamespace>
+    <RootNamespace>WebStore_Edu.WebAPI.Clients</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\WebStore-Edu.Domain\WebStore-Edu.Domain.csproj" />
+    <ProjectReference Include="..\WebStore-Edu.Interfaces\WebStore-Edu.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
