@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.ViewModels;
@@ -15,6 +16,10 @@ namespace WebStore_Edu.Controllers
             _UserManager = userManager;
             _SignInManager = signInManager;
         }
+
+        [Authorize]
+        public IActionResult Index() => View();
+
 
         public IActionResult Authorize() => View();
         public IActionResult Login(string ReturnUrl) => View(new LoginUserViewModel(){ReturnUrl = ReturnUrl});
