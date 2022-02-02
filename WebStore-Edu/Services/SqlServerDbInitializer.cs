@@ -7,14 +7,14 @@ using WebStore_Edu.Services.Interfaces;
 
 namespace WebStore_Edu.Services
 {
-    public class DbInitializer : IDbInitializer
+    public class SqlServerDbInitializer : IDbInitializer
     {
         private readonly WebStoreDb _Db;
-        private readonly ILogger<DbInitializer> _Logger;
+        private readonly ILogger<SqlServerDbInitializer> _Logger;
         private readonly UserManager<User> _UserManager;
         private readonly RoleManager<Role> _RoleManager;
 
-        public DbInitializer(WebStoreDb Db, ILogger<DbInitializer> Logger, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public SqlServerDbInitializer(WebStoreDb Db, ILogger<SqlServerDbInitializer> Logger, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             _Db = Db;
             _Logger = Logger;

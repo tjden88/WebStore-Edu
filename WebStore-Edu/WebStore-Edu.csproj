@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
+	  <ProjectReference Include="..\WebStore.DAL.SqLite\WebStore-Edu.DAL.SqLite.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -30,7 +30,6 @@ services.AddScoped<IMapper, ServiceMapper>();
 // Add Services
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
-services.AddScoped<IDbInitializer, DbInitializer>();
 services.AddScoped<ICartService, InCookiesCartService>();
 services.AddScoped<IOrderService, SqlOrderService>();
 
@@ -68,8 +67,28 @@ services.ConfigureApplicationCookie(opt =>
 });
 
 // Add db
-services.AddDbContext<WebStoreDb>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+
+var db = builder.Configuration["Database"];
+
+switch (db)
+{
+    case "SqlServer":
+        services.AddDbContext<WebStoreDb>(opt =>
+            opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+        services.AddScoped<IDbInitializer, SqlServerDbInitializer>();
+        break;
+
+    case "SqLite":
+        services.AddDbContext<WebStoreDb>(opt =>
+            opt.UseSqlite(builder.Configuration.GetConnectionString("SqLite"),
+                o => o.MigrationsAssembly("WebStore-Edu.DAL.SqLite")));
+        services.AddScoped<IDbInitializer, SqLiteDbInitializer>();
+        break;
+
+    default:
+        throw new InvalidOperationException($"Тип БД {db} не поддерживается");
+}
+
 
 var app = builder.Build();
 
