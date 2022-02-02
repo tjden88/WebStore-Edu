@@ -1,4 +1,12 @@
 ﻿<ul class="nav navbar-nav">
-    <li><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+    <li>
+        <a asp-controller="Cart" asp-action="Index">
+            <i class="fa fa-shopping-cart"></i> Корзина
+            @if (ViewBag.CartCount > 0)
+            {
+                <text> (Товаров: @ViewBag.CartCount)</text>
+            }
+        </a>
+    </li>
     <li><a asp-controller="Account" asp-action="Authorize"><i class="fa fa-lock"></i> Вход/Регистрация</a></li>
 </ul>

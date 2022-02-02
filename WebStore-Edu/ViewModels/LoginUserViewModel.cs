@@ -16,6 +16,6 @@ namespace WebStore_Edu.ViewModels
         public bool Remember { get; set; }
 
         [HiddenInput]
-        public string? RedirectUrl { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }

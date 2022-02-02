@@ -50,6 +50,5 @@ namespace WebStore_Edu.Controllers
             return View(_Mapper.Map<ProductViewModel>(product));
         }
 
-        public IActionResult Checkout() => View();
     }
 }

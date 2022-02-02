@@ -32,6 +32,7 @@ services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
 services.AddScoped<ICartService, InCookiesCartService>();
+services.AddScoped<IOrderService, SqlOrderService>();
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
@@ -60,7 +61,7 @@ services.ConfigureApplicationCookie(opt =>
     opt.Cookie.Name = "WebStore-Edu";
     opt.Cookie.HttpOnly = true;
     opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-    opt.LoginPath = "/Account/Authorize";
+    opt.LoginPath = "/Account/Login";
     opt.AccessDeniedPath = "/Account/AccessDenied";
 
     opt.SlidingExpiration = true;
@@ -100,8 +101,19 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapDefaultControllerRoute(); // Home Controller
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 
 #endregion

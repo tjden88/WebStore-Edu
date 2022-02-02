@@ -1,0 +1,9 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Заказ оформлен";
+    Layout = "_LayoutContainer";
+}
+
+<h2>Заказ №@Model.ToString("00000") оформлен!</h2>
+Для получения информации о заказе перейдите в <a asp-controller="Account" asp-action="Index">личный кабинет</a>.

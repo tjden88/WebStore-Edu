@@ -51,5 +51,11 @@ namespace WebStore_Edu.Services.InSql
                 .Include(p => p.Brand)
                 .Include(p => p.Section)
                 .FirstOrDefault(p => p.Id == Id);
+
+        public bool Remove(int Id)
+        {
+            _Db.Entry(new Product() {Id = Id}).State = EntityState.Deleted;
+           return  _Db.SaveChanges() > 0;
+        }
     }
 }

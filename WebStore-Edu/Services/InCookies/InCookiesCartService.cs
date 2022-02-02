@@ -123,5 +123,7 @@ namespace WebStore_Edu.Services.InCookies
             };
 
         }
+
+        public int ProductsCount() => GetUserCart().TotalCount;
     }
 }

@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
@@ -16,7 +19,21 @@ namespace WebStore_Edu.Controllers
             _SignInManager = signInManager;
         }
 
+        [Authorize]
+        public IActionResult Index() => View();
+
+
+        [Authorize]
+        public async Task<IActionResult> Orders([FromServices] IOrderService OrderService, [FromServices] IMapper Mapper)
+        {
+            var userOrders = await OrderService.GetUserOrdersAsync(await _UserManager.FindByNameAsync(User.Identity!.Name));
+            return View(Mapper.Map<IEnumerable<UserOrderViewModel>>(userOrders));
+        }
+
+
         public IActionResult Authorize() => View();
+        public IActionResult Login(string ReturnUrl) => View(new LoginUserViewModel(){ReturnUrl = ReturnUrl});
+        public IActionResult Register() => View(new RegisterUserViewModel());
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterUserViewModel Model)
@@ -75,7 +92,7 @@ namespace WebStore_Edu.Controllers
 
             if (loginResult.Succeeded)
             {
-                return LocalRedirect(Model.RedirectUrl ?? "/");
+                return LocalRedirect(Model.ReturnUrl ?? "/");
             }
 
             ModelState.AddModelError("", "Неверное имя пользователя или пароль");

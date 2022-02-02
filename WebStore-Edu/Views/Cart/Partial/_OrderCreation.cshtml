@@ -1,0 +1,22 @@
+﻿@model OrderVievModel
+
+<form asp-action="Checkout" asp-antiforgery="true">
+                        
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <span asp-validation-for="Phone" class="text-danger"></span>
+    <label asp-for="Phone" class="sr-only"></label>
+    <input asp-for="Phone" placeholder="Телефон"/>
+
+    <span asp-validation-for="Address" class="text-danger"></span>
+    <label asp-for="Address" class="sr-only"></label>
+    <input asp-for="Address" placeholder="Адрес доставки"/>
+
+    <div class="order-message">
+        <p>Примечания</p>
+        <textarea asp-for="Notes" placeholder="Оставьте здесь примечания к заказу" rows="5"></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Завершить оформление"/>
+</form>
