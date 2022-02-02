@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebStore_Edu.Domain.Identity;
 
 namespace WebStore_Edu.ViewModels
 {
@@ -12,10 +11,6 @@ namespace WebStore_Edu.ViewModels
         [Required]
         public string Address { get; set; }
 
-        public string Notes { get; set; }
-
-        public User User { get; set; }
-
-        public CartViewModel Cart { get; set; }
+        public string? Notes { get; set; }
     }
 }

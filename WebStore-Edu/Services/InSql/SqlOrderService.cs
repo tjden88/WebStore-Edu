@@ -44,32 +44,35 @@ namespace WebStore_Edu.Services.InSql
             return order;
         }
 
-        public async Task<Order> CreateOrderAsync(OrderVievModel OrderModel, CancellationToken Cancel = default)
+        public async Task<Order> CreateOrderAsync(User User, CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default)
         {
             await using var transaction = await _Db.Database.BeginTransactionAsync(Cancel).ConfigureAwait(false);
 
             var order = _Mapper.Map<Order>(OrderModel);
+            order.User = User;
 
-            var prodIds = OrderModel.Cart.Items.Select(i => i.Product.Id);
+            var prodIds = Cart.Items.Select(i => i.Product.Id);
 
-
-            var orderItems = await _Db.Products
+            var products = await _Db.Products
                 .Where(p => prodIds.Contains(p.Id))
-                .Join(OrderModel.Cart.Items,
+                .ToArrayAsync(Cancel)
+                .ConfigureAwait(false);
+
+            var orderItems = products
+                .Join(Cart.Items,
                     prod => prod.Id,
                     cartItem => cartItem.Product.Id,
                     (p, item) => new OrderItem()
                     {
-                        Id=p.Id,
                         Order = order,
                         Quantity = item.Quantity,
                         Price = p.Price,
                         Product = p
                     })
-                .ToArrayAsync(Cancel)
-                .ConfigureAwait(false);
+                .ToArray();
 
             order.OrderItems = orderItems;
+
 
             await _Db.Orders.AddAsync(order, Cancel).ConfigureAwait(false);
 

@@ -10,6 +10,6 @@ namespace WebStore_Edu.Services.Interfaces
 
         Task<Order?> GetOrderAsync(int Id, CancellationToken Cancel = default);
 
-        Task<Order> CreateOrderAsync(OrderVievModel OrderModel, CancellationToken Cancel = default);
+        Task<Order> CreateOrderAsync(User User, CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default);
     }
 }
