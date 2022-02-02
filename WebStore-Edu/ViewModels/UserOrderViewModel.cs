@@ -1,4 +1,6 @@
-﻿namespace WebStore_Edu.ViewModels
+﻿using WebStore_Edu.Domain.Entityes.Orders;
+
+namespace WebStore_Edu.ViewModels
 {
     public class UserOrderViewModel
     {
@@ -13,6 +15,8 @@
         public DateTimeOffset Date { get; set; }
 
         public decimal TotalPrice;
+
+        public OrderStatus OrderStatus { get; set; }
 
     }
 }

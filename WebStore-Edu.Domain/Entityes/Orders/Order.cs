@@ -7,6 +7,17 @@ using WebStore_Edu.Domain.Identity;
 
 namespace WebStore_Edu.Domain.Entityes.Orders
 {
+    public enum OrderStatus
+    {
+        [Display(Name = "Новый")]
+        Created,
+        [Display(Name = "Подтверждён")]
+        Confirmed,
+        [Display(Name = "Выполнен")]
+        Deliverer
+    }
+
+
     public class Order : Entity
     {
         [Required]
@@ -27,5 +38,7 @@ namespace WebStore_Edu.Domain.Entityes.Orders
         public ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
 
         public decimal TotalPrice => OrderItems.Sum(i => i.TotalItemsPrice);
+
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Created;
     }
 }
