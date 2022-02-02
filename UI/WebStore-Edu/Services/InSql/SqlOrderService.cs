@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Services.Interfaces;
-using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Services.InSql
 {

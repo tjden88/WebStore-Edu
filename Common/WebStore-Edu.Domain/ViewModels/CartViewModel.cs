@@ -1,4 +1,7 @@
-﻿namespace WebStore_Edu.ViewModels
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class CartViewModel
     {

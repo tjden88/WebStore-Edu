@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
 
-namespace WebStore_Edu.ViewModels
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class LoginUserViewModel
     {
@@ -15,7 +14,6 @@ namespace WebStore_Edu.ViewModels
 
         public bool Remember { get; set; }
 
-        [HiddenInput]
         public string? ReturnUrl { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using WebStore_Edu.Domain.Entityes.Orders;
+﻿using System;
+using WebStore_Edu.Domain.Entityes.Orders;
 
-namespace WebStore_Edu.ViewModels
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class UserOrderViewModel
     {

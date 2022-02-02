@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebStore_Edu.Domain.Entityes;
 
-namespace WebStore_Edu.ViewModels
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class ProductViewModel
     {

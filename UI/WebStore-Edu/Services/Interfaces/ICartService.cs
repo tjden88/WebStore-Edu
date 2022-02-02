@@ -1,4 +1,4 @@
-﻿using WebStore_Edu.ViewModels;
+﻿using WebStore_Edu.Domain.ViewModels;
 
 namespace WebStore_Edu.Services.Interfaces
 {

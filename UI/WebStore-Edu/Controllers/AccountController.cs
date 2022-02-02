@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Services.Interfaces;
-using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
 {

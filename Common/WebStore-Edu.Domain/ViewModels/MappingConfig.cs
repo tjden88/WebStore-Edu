@@ -1,7 +1,7 @@
 ﻿using Mapster;
 using WebStore_Edu.Domain.Entityes;
 
-namespace WebStore_Edu.ViewModels
+namespace WebStore_Edu.Domain.ViewModels
 {
     public static class MappingConfig
     {

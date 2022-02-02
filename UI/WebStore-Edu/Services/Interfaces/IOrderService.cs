@@ -1,6 +1,6 @@
 ﻿using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.Identity;
-using WebStore_Edu.ViewModels;
+using WebStore_Edu.Domain.ViewModels;
 
 namespace WebStore_Edu.Services.Interfaces
 {

@@ -1,4 +1,6 @@
-﻿namespace WebStore_Edu.ViewModels
+﻿using System.Collections.Generic;
+
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class SectionViewModel
     {

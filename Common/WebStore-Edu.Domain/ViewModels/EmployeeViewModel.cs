@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace WebStore_Edu.ViewModels
+namespace WebStore_Edu.Domain.ViewModels
 {
     public class EmployeeViewModel
     {

@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.InCookies;
 using WebStore_Edu.Services.InSql;
 using WebStore_Edu.Services.Interfaces;
-using WebStore_Edu.ViewModels;
 
 
 #region Построение приложения
