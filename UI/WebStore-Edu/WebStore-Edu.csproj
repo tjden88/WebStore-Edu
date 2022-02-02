@@ -26,6 +26,7 @@
 	  <ProjectReference Include="..\..\Data\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
 	  <ProjectReference Include="..\..\Data\WebStore.DAL.SqLite\WebStore-Edu.DAL.SqLite.csproj" />
 	  <ProjectReference Include="..\..\Services\WebStore-Edu.Services\WebStore-Edu.Services.csproj" />
+	  <ProjectReference Include="..\..\Services\WebStore-Edu.WebAPI.Clients\WebStore-Edu.WebAPI.Clients.csproj" />
 	</ItemGroup>
 
 
