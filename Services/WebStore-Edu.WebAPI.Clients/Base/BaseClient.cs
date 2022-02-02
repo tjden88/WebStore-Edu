@@ -2,13 +2,13 @@
 {
     public abstract class BaseClient
     {
-        protected HttpClient Client;
+        protected HttpClient Http;
 
         protected string Address;
 
-        protected BaseClient(HttpClient HttpClient, string Address)
+        protected BaseClient(HttpClient HttpHttp, string Address)
         {
-            Client = HttpClient;
+            Http = HttpHttp;
             this.Address = Address;
         }
     }

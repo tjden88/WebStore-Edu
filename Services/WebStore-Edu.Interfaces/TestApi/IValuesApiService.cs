@@ -4,7 +4,7 @@
     {
         IEnumerable<string> GetAll();
 
-        string Get(int Id);
+        string? Get(int Id);
 
         int Count();
 
@@ -12,6 +12,6 @@
 
         void Update(int Id, string Value);
 
-        void Delete(int Id);
+        bool Delete(int Id);
     }
 }

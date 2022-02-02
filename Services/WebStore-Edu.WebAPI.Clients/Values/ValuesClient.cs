@@ -1,38 +1,65 @@
-﻿using WebStore_Edu.Interfaces.TestApi;
+﻿using System.Net.Http.Json;
+using WebStore_Edu.Interfaces.TestApi;
+using WebStore_Edu.WebAPI.Clients.Base;
 
 namespace WebStore_Edu.WebAPI.Clients.Values
 {
-    public class ValuesClient : IValuesApiService
+    public class ValuesClient : BaseClient, IValuesApiService
     {
-
+        public ValuesClient(HttpClient HttpHttp) : base(HttpHttp, "api/values")
+        {
+        }
         public IEnumerable<string> GetAll()
         {
-            throw new NotImplementedException();
+            var response = Http.GetAsync(Address).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<IEnumerable<string>>().Result!;
+            }
+
+            return Enumerable.Empty<string>();
         }
 
-        public string Get(int Id)
+        public string? Get(int Id)
         {
-            throw new NotImplementedException();
+            var response = Http.GetAsync($"{Address}/{Id}").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<string>().Result!;
+            }
+
+            return null;
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
+            var response = Http.GetAsync($"{Address}/count").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content.ReadFromJsonAsync<int>().Result;
+            }
+
+            return -1;
         }
 
         public void Add(string Value)
         {
-            throw new NotImplementedException();
+            var response = Http.PostAsJsonAsync(Address, Value).Result;
+            response.EnsureSuccessStatusCode();
         }
 
         public void Update(int Id, string Value)
         {
-            throw new NotImplementedException();
+            var response = Http.PutAsJsonAsync($"{Address}/{Id}", Value).Result;
+            response.EnsureSuccessStatusCode();
         }
 
-        public void Delete(int Id)
+        public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            var response = Http.DeleteAsync($"{Address}/{Id}").Result;
+           return response.IsSuccessStatusCode;
         }
+
+
     }
 }
