@@ -19,6 +19,7 @@ namespace WebStore_Edu.Domain.Entityes.Orders
         [Required]
         [MaxLength(200)]
         public string Address { get; set; }
+
         public string Notes { get; set; }
 
         public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;

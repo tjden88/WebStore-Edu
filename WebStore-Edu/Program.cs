@@ -32,6 +32,7 @@ services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IDbInitializer, DbInitializer>();
 services.AddScoped<ICartService, InCookiesCartService>();
+services.AddScoped<IOrderService, SqlOrderService>();
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
