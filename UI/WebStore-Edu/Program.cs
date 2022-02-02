@@ -6,10 +6,12 @@ using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
+using WebStore_Edu.Interfaces.TestApi;
 using WebStore_Edu.Services;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.Services.Services.InSql;
+using WebStore_Edu.WebAPI.Clients.Values;
 
 
 #region Построение приложения
@@ -33,6 +35,9 @@ services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<ICartService, InCookiesCartService>();
 services.AddScoped<IOrderService, SqlOrderService>();
+
+services.AddHttpClient<IValuesApiService, ValuesClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["API"]));
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
