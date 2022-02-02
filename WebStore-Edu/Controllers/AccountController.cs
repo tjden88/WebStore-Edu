@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Identity;
+using WebStore_Edu.Services.Interfaces;
 using WebStore_Edu.ViewModels;
 
 namespace WebStore_Edu.Controllers
@@ -19,6 +21,14 @@ namespace WebStore_Edu.Controllers
 
         [Authorize]
         public IActionResult Index() => View();
+
+
+        [Authorize]
+        public async Task<IActionResult> Orders([FromServices] IOrderService OrderService, [FromServices] IMapper Mapper)
+        {
+            var userOrders = await OrderService.GetUserOrdersAsync(await _UserManager.FindByNameAsync(User.Identity!.Name));
+            return View(Mapper.Map<IEnumerable<UserOrderViewModel>>(userOrders));
+        }
 
 
         public IActionResult Authorize() => View();
