@@ -70,13 +70,13 @@ namespace WebStore_Edu.WebAPI.Clients.Identity
         public async Task<IdentityResult> CreateAsync(User user, CancellationToken cancel)
         {
             var response = await PostAsync($"{Address}/User", user, cancel);
-            var creation_success = await response
+            var creationSuccess = await response
                .EnsureSuccessStatusCode()
                .Content
                .ReadFromJsonAsync<bool>(cancellationToken: cancel)
                .ConfigureAwait(false);
 
-            return creation_success
+            return creationSuccess
                 ? IdentityResult.Success
                 : IdentityResult.Failed();
         }
@@ -84,13 +84,13 @@ namespace WebStore_Edu.WebAPI.Clients.Identity
         public async Task<IdentityResult> UpdateAsync(User user, CancellationToken cancel)
         {
             var response = await PutAsync($"{Address}/User", user, cancel);
-            var update_result = await response
+            var updateResult = await response
                .EnsureSuccessStatusCode()
                .Content
                .ReadFromJsonAsync<bool>(cancellationToken: cancel)
                .ConfigureAwait(false);
 
-            return update_result
+            return updateResult
                 ? IdentityResult.Success
                 : IdentityResult.Failed();
         }
@@ -98,13 +98,13 @@ namespace WebStore_Edu.WebAPI.Clients.Identity
         public async Task<IdentityResult> DeleteAsync(User user, CancellationToken cancel)
         {
             var response = await PostAsync($"{Address}/User/Delete", user, cancel);
-            var delete_result = await response
+            var deleteResult = await response
                .EnsureSuccessStatusCode()
                .Content
                .ReadFromJsonAsync<bool>(cancellationToken: cancel)
                .ConfigureAwait(false);
 
-            return delete_result
+            return deleteResult
                 ? IdentityResult.Success
                 : IdentityResult.Failed();
         }

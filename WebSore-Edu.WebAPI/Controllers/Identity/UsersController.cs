@@ -54,16 +54,16 @@ namespace WebSore_Edu.WebAPI.Controllers.Identity
         [HttpPost("User")] // POST -> api/v1/users/user
         public async Task<bool> CreateAsync([FromBody] User user)
         {
-            var creation_result = await _UserStore.CreateAsync(user);
+            var creationResult = await _UserStore.CreateAsync(user);
             // добавление ошибок создания нового пользователя в журнал
-            return creation_result.Succeeded;
+            return creationResult.Succeeded;
         }
 
         [HttpPut("User")] // PUT -> api/v1/users/user
         public async Task<bool> UpdateAsync([FromBody] User user)
         {
-            var update_result = await _UserStore.UpdateAsync(user);
-            return update_result.Succeeded;
+            var updateResult = await _UserStore.UpdateAsync(user);
+            return updateResult.Succeeded;
         }
 
         [HttpPost("User/Delete")] // POST api/users/user/delete
@@ -71,8 +71,8 @@ namespace WebSore_Edu.WebAPI.Controllers.Identity
                                   //[HttpDelete] // DELETE api/v1/users
         public async Task<bool> DeleteAsync([FromBody] User user)
         {
-            var delete_result = await _UserStore.DeleteAsync(user);
-            return delete_result.Succeeded;
+            var deleteResult = await _UserStore.DeleteAsync(user);
+            return deleteResult.Succeeded;
         }
 
         [HttpGet("User/Find/{id}")] // api/v1/users/user/Find/9E5CB5E7-41DE-4449-829E-45F4C97AA54B

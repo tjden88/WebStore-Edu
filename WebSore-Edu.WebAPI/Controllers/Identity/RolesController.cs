@@ -23,24 +23,24 @@ namespace WebSore_Edu.WebAPI.Controllers.Identity
         [HttpPost]
         public async Task<bool> CreateAsync(Role role)
         {
-            var creation_result = await _RoleStore.CreateAsync(role);
+            var creationResult = await _RoleStore.CreateAsync(role);
             // Добавить логирование в случае Succeeded == false
-            return creation_result.Succeeded;
+            return creationResult.Succeeded;
         }
 
         [HttpPut]
         public async Task<bool> UpdateAsync(Role role)
         {
-            var uprate_result = await _RoleStore.UpdateAsync(role);
-            return uprate_result.Succeeded;
+            var uprateResult = await _RoleStore.UpdateAsync(role);
+            return uprateResult.Succeeded;
         }
 
         [HttpDelete]
         [HttpPost("Delete")]
         public async Task<bool> DeleteAsync(Role role)
         {
-            var delete_result = await _RoleStore.DeleteAsync(role);
-            return delete_result.Succeeded;
+            var deleteResult = await _RoleStore.DeleteAsync(role);
+            return deleteResult.Succeeded;
         }
 
         [HttpPost("GetRoleId")]

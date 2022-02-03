@@ -87,30 +87,6 @@ services.ConfigureApplicationCookie(opt =>
     opt.SlidingExpiration = true;
 });
 
-// Add db
-
-var db = builder.Configuration["Database"];
-
-switch (db)
-{
-    case "SqlServer":
-        services.AddDbContext<WebStoreDb>(opt =>
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
-        services.AddScoped<IDbInitializer, SqlServerDbInitializer>();
-        break;
-
-    case "SqLite":
-        services.AddDbContext<WebStoreDb>(opt =>
-            opt.UseSqlite(builder.Configuration.GetConnectionString("SqLite"),
-                o => o.MigrationsAssembly("WebStore-Edu.DAL.SqLite")));
-        services.AddScoped<IDbInitializer, SqLiteDbInitializer>();
-        break;
-
-    default:
-        throw new InvalidOperationException($"Тип БД {db} не поддерживается");
-}
-
-
 var app = builder.Build();
 
 #endregion
@@ -157,14 +133,6 @@ app.UseEndpoints(endpoints =>
 
 
 #endregion
-
-// Инициализация данных БД
-
-await using (var scope = app.Services.CreateAsyncScope())
-{
-    await scope.ServiceProvider.GetRequiredService<IDbInitializer>().InitializeAsync();
-}
-
 
 // Запуск приложения
 app.Run();

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 
 namespace WebStore_Edu.WebAPI.Clients.Base
 {
@@ -20,6 +21,7 @@ namespace WebStore_Edu.WebAPI.Clients.Base
         protected async Task<T?> GetAsync<T>(string url, CancellationToken Cancel = default)
         {
             var response = await Http.GetAsync(url, Cancel).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.NoContent) return default;
             return await response
                 .EnsureSuccessStatusCode()
                 .Content
@@ -32,7 +34,7 @@ namespace WebStore_Edu.WebAPI.Clients.Base
         protected async Task<HttpResponseMessage> PostAsync<T>(string url, T value, CancellationToken Cancel = default)
         {
             var response = await Http.PostAsJsonAsync(url, value, Cancel).ConfigureAwait(false);
-            return response.EnsureSuccessStatusCode();
+            return response;
         }
 
 
@@ -41,7 +43,7 @@ namespace WebStore_Edu.WebAPI.Clients.Base
         protected async Task<HttpResponseMessage> PutAsync<T>(string url, T value, CancellationToken Cancel = default)
         {
             var response = await Http.PutAsJsonAsync(url, value, Cancel).ConfigureAwait(false);
-            return response.EnsureSuccessStatusCode();
+            return response;
         }
 
 
