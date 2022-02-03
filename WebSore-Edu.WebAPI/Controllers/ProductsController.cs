@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapsterMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain;
+using WebStore_Edu.Domain.DTO;
 using WebStore_Edu.Interfaces.Services;
 
 namespace WebSore_Edu.WebAPI.Controllers
@@ -9,18 +11,23 @@ namespace WebSore_Edu.WebAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductData _ProductData;
+        private readonly IMapper _Mapper;
 
-        public ProductsController(IProductData ProductData) => _ProductData = ProductData;
+        public ProductsController(IProductData ProductData, IMapper Mapper)
+        {
+            _ProductData = ProductData;
+            _Mapper = Mapper;
+        }
 
         [HttpGet("sections")]
-        public IActionResult GetSections() => Ok(_ProductData.GetSections());
+        public IActionResult GetSections() => Ok(_Mapper.Map<IEnumerable<SectionDTO>>(_ProductData.GetSections()));
 
 
         [HttpGet("brands")]
-        public IActionResult GetBrands() => Ok(_ProductData.GetBrands());
+        public IActionResult GetBrands() => Ok(_Mapper.Map<IEnumerable<BrandDTO>>(_ProductData.GetBrands()));
 
         [HttpPost]
-        public IActionResult GetProducts(ProductFilter? Filter = null) => Ok(_ProductData.GetProducts(Filter));
+        public IActionResult GetProducts(ProductFilter? Filter = null) => Ok(_Mapper.Map<IEnumerable<ProductDTO>>(_ProductData.GetProducts(Filter)));
 
 
         [HttpGet("{Id}")]
@@ -29,7 +36,7 @@ namespace WebSore_Edu.WebAPI.Controllers
             var product = _ProductData.GetProduct(Id);
             return product is null
                 ? NotFound()
-                : Ok(product);
+                : Ok(_Mapper.Map<ProductDTO>(product));
         }
 
         [HttpDelete("{Id}")]
