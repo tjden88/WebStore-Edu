@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain.Entityes;
-using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Interfaces.Services;
 
 namespace WebSore_Edu.WebAPI.Controllers
@@ -27,7 +25,6 @@ namespace WebSore_Edu.WebAPI.Controllers
             return Ok(employee);
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult Add(Employee Employee)
         {
@@ -37,7 +34,6 @@ namespace WebSore_Edu.WebAPI.Controllers
         }
 
 
-        [Authorize(Roles = Role.Administrators)]
         [HttpPut]
         public IActionResult Update(Employee Employee)
         {
@@ -48,7 +44,6 @@ namespace WebSore_Edu.WebAPI.Controllers
         }
 
 
-        [Authorize(Roles = Role.Administrators)]
         [HttpDelete("{Id}")]
         public IActionResult Delete(int Id)
         {
