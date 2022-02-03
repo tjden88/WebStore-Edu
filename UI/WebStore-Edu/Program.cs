@@ -11,6 +11,7 @@ using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.Services.Services.InSql;
 using WebStore_Edu.WebAPI.Clients.Employees;
+using WebStore_Edu.WebAPI.Clients.Products;
 using WebStore_Edu.WebAPI.Clients.Values;
 
 
@@ -29,13 +30,13 @@ services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<ICartService, InCookiesCartService>();
 services.AddScoped<IOrderService, SqlOrderService>();
 
 // WebClients
 services.AddHttpClient<IValuesApiService, ValuesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
+services.AddHttpClient<IProductData, ProductsClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
