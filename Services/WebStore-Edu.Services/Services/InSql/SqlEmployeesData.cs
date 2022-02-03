@@ -41,24 +41,21 @@ namespace WebStore_Edu.Services.Services.InSql
             if (employee is null)
                 throw new ArgumentNullException(nameof(employee));
 
-            if (GetById(employee.Id) is not { } empl)
-            {
-                _Logger.LogWarning("Попытка изменить несуществующего сотрудника с id:{0}", employee.Id);
-                return false;
-            }
-
             _Db.Entry(employee).State = EntityState.Modified;
-            _Db.SaveChanges();
+            var success = _Db.SaveChanges() > 0;
 
-            _Logger.LogInformation("Изменён сотрудник: {0}", empl);
+            if (success)
+                _Logger.LogInformation("Изменён сотрудник: {0}", employee);
+            else
+                _Logger.LogWarning("Попытка изменить сотрудника с id:{0} не удалась", employee.Id);
 
-            return true;
+            return success;
         }
 
         public bool Delete(int Id)
         {
             var employee = _Db.Employees
-                .Select(e => new Employee {Id = e.Id})
+                .Select(e => new Employee { Id = e.Id })
                 .FirstOrDefault(e => e.Id == Id);
 
             if (employee is null)

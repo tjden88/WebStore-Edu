@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\WebStore-Edu.DAL\WebStore-Edu.DAL.csproj" />
+    <ProjectReference Include="..\Data\WebStore.DAL.SqLite\WebStore-Edu.DAL.SqLite.csproj" />
+    <ProjectReference Include="..\Services\WebStore-Edu.Services\WebStore-Edu.Services.csproj" />
   </ItemGroup>
 
 </Project>

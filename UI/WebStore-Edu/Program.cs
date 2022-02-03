@@ -3,14 +3,17 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
+using WebStore_Edu.Domain.DTO;
+using WebStore_Edu.Domain.DTO.Orders;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Interfaces.TestApi;
-using WebStore_Edu.Services;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
-using WebStore_Edu.Services.Services.InSql;
+using WebStore_Edu.WebAPI.Clients.Employees;
+using WebStore_Edu.WebAPI.Clients.Orders;
+using WebStore_Edu.WebAPI.Clients.Products;
 using WebStore_Edu.WebAPI.Clients.Values;
 
 
@@ -24,20 +27,21 @@ services.AddControllersWithViews();
 
 // Mapster
 var config = new TypeAdapterConfig();
-
 config.ConfigureViewModels();
-
+config.ConfigureDTOModels();
 services.AddSingleton(config);
 services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
-services.AddScoped<IEmployeesData, SqlEmployeesData>();
-services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<ICartService, InCookiesCartService>();
-services.AddScoped<IOrderService, SqlOrderService>();
 
-services.AddHttpClient<IValuesApiService, ValuesClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["API"]));
+// WebClients
+services.AddHttpClient("WebApi", client => client.BaseAddress = new Uri(builder.Configuration["API"]))
+    .AddTypedClient<IValuesApiService, ValuesClient>()
+    .AddTypedClient<IEmployeesData, EmployeesClient>()
+    .AddTypedClient<IProductData, ProductsClient>()
+    .AddTypedClient<IOrderService, OrdersClient>()
+    ;
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
