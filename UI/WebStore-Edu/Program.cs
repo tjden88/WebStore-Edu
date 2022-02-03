@@ -36,10 +36,12 @@ services.AddScoped<IMapper, ServiceMapper>();
 services.AddScoped<ICartService, InCookiesCartService>();
 
 // WebClients
-services.AddHttpClient<IValuesApiService, ValuesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
-services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
-services.AddHttpClient<IProductData, ProductsClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
-services.AddHttpClient<IOrderService, OrdersClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
+services.AddHttpClient("WebApi", client => client.BaseAddress = new Uri(builder.Configuration["API"]))
+    .AddTypedClient<IValuesApiService, ValuesClient>()
+    .AddTypedClient<IEmployeesData, EmployeesClient>()
+    .AddTypedClient<IProductData, ProductsClient>()
+    .AddTypedClient<IOrderService, OrdersClient>()
+    ;
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()
