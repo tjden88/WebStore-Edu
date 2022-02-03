@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.DTO;
-using WebStore_Edu.Domain.DTO.Orders;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
@@ -12,6 +11,7 @@ using WebStore_Edu.Interfaces.TestApi;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.WebAPI.Clients.Employees;
+using WebStore_Edu.WebAPI.Clients.Identity;
 using WebStore_Edu.WebAPI.Clients.Orders;
 using WebStore_Edu.WebAPI.Clients.Products;
 using WebStore_Edu.WebAPI.Clients.Values;
@@ -43,9 +43,20 @@ services.AddHttpClient("WebApi", client => client.BaseAddress = new Uri(builder.
     .AddTypedClient<IOrderService, OrdersClient>()
     ;
 
-services.AddIdentity<User, Role>() // Identity
-    .AddEntityFrameworkStores<WebStoreDb>()
+// Identity
+services.AddIdentity<User, Role>()
     .AddDefaultTokenProviders();
+services.AddHttpClient("WebStoreAPIIdentity", client => client.BaseAddress = new(builder.Configuration["API"]))
+    .AddTypedClient<IUserStore<User>, UsersClient>()
+    .AddTypedClient<IUserRoleStore<User>, UsersClient>()
+    .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
+    .AddTypedClient<IUserEmailStore<User>, UsersClient>()
+    .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
+    .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
+    .AddTypedClient<IUserClaimStore<User>, UsersClient>()
+    .AddTypedClient<IUserLoginStore<User>, UsersClient>()
+    .AddTypedClient<IRoleStore<Role>, RolesClient>();
+
 
 services.Configure<IdentityOptions>(opt =>
 {

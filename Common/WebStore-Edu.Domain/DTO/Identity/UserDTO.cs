@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using WebStore_Edu.Domain.Identity;
 
 namespace WebStore_Edu.Domain.DTO.Identity
 {
     public class UserDTO
     {
-        public string UserName { get; set; }
+        public User User { get; set; }
 
         public string PasswordHash { get; set; }
 
