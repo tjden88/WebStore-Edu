@@ -6,7 +6,7 @@ using WebStore_Edu.Interfaces.Services;
 
 namespace WebSore_Edu.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(ApiAddresses.Products)]
     [ApiController]
     public class ProductsController : ControllerBase
     {

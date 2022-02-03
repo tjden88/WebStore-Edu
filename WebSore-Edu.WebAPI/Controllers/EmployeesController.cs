@@ -4,7 +4,7 @@ using WebStore_Edu.Interfaces.Services;
 
 namespace WebSore_Edu.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(ApiAddresses.Employees)]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
