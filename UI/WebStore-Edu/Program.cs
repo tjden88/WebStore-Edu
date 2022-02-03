@@ -1,14 +1,14 @@
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using WebStore_Edu.DAL.Context;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 using WebStore_Edu.Domain.DTO;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Interfaces.TestApi;
-using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.WebAPI.Clients.Employees;
 using WebStore_Edu.WebAPI.Clients.Identity;
@@ -20,6 +20,14 @@ using WebStore_Edu.WebAPI.Clients.Values;
 #region Построение приложения
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Logging
+builder.Host.UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration)
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(new JsonFormatter(",", true), @$".\Logs\{DateTime.Today:d}.json"));
 
 var services = builder.Services;
 
