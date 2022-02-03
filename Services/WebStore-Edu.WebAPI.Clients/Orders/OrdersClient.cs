@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Json;
+using Mapster;
+using MapsterMapper;
 using WebStore_Edu.Domain.DTO;
 using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.Identity;
@@ -10,30 +12,33 @@ namespace WebStore_Edu.WebAPI.Clients.Orders
 {
     public class OrdersClient : BaseClient, IOrderService
     {
-        public OrdersClient(HttpClient HttpHttp) : base(HttpHttp, "api/orders")
+        private readonly IMapper _Mapper;
+
+        public OrdersClient(HttpClient HttpHttp, IMapper Mapper) : base(HttpHttp, "api/orders")
         {
+            _Mapper = Mapper;
         }
 
         public async Task<IEnumerable<Order>> GetUserOrdersAsync(User User, CancellationToken Cancel = default)
         {
-            return (await GetAsync<IEnumerable<Order>>($"{Address}/list/{User.UserName}"))!;
+            var dtos = await GetAsync<IEnumerable<OrderDTO>>($"{Address}/list/{User.UserName}");
+            return dtos!.Adapt<IEnumerable<Order>>();
         }
 
         public async Task<Order?> GetOrderAsync(int Id, CancellationToken Cancel = default)
         {
-            return await GetAsync<Order?>($"{Address}/{Id}");
+            var orderDTO = await GetAsync<Order?>($"{Address}/{Id}");
+            return orderDTO!.Adapt<Order>();
         }
 
         public async Task<Order> CreateOrderAsync(User User, CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default)
         {
-            var orderDto = new CreateOrderDTO()
-            {
-                Cart = Cart,
-                OrderModel = OrderModel
-            };
+            var orderDto = _Mapper.Map<CreateOrderDTO>(Cart);
+            orderDto.OrderModel = OrderModel;
             var responce = await PostAsync($"{Address}/add/{User.UserName}", orderDto);
 
-            return (await responce.Content.ReadFromJsonAsync<Order>(cancellationToken: Cancel))!;
+            var dto = await responce.Content.ReadFromJsonAsync<OrderDTO>(cancellationToken: Cancel);
+            return dto!.Adapt<Order>();
         }
     }
 }

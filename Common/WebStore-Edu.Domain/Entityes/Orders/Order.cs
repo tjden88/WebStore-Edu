@@ -17,7 +17,6 @@ namespace WebStore_Edu.Domain.Entityes.Orders
         Deliverer
     }
 
-
     public class Order : Entity
     {
         [Required]
