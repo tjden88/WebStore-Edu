@@ -9,8 +9,8 @@ using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Interfaces.TestApi;
 using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
-using WebStore_Edu.Services.Services.InSql;
 using WebStore_Edu.WebAPI.Clients.Employees;
+using WebStore_Edu.WebAPI.Clients.Orders;
 using WebStore_Edu.WebAPI.Clients.Products;
 using WebStore_Edu.WebAPI.Clients.Values;
 
@@ -31,12 +31,12 @@ services.AddScoped<IMapper, ServiceMapper>();
 
 // Add Services
 services.AddScoped<ICartService, InCookiesCartService>();
-services.AddScoped<IOrderService, SqlOrderService>();
 
 // WebClients
 services.AddHttpClient<IValuesApiService, ValuesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 services.AddHttpClient<IProductData, ProductsClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
+services.AddHttpClient<IOrderService, OrdersClient>(client => client.BaseAddress = new Uri(builder.Configuration["API"]));
 
 services.AddIdentity<User, Role>() // Identity
     .AddEntityFrameworkStores<WebStoreDb>()

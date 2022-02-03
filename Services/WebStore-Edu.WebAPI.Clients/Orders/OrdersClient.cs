@@ -1,4 +1,6 @@
-﻿using WebStore_Edu.Domain.Entityes.Orders;
+﻿using System.Net.Http.Json;
+using WebStore_Edu.Domain.DTO;
+using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
@@ -12,19 +14,26 @@ namespace WebStore_Edu.WebAPI.Clients.Orders
         {
         }
 
-        public Task<IEnumerable<Order>> GetUserOrdersAsync(User User, CancellationToken Cancel = default)
+        public async Task<IEnumerable<Order>> GetUserOrdersAsync(User User, CancellationToken Cancel = default)
         {
-            throw new NotImplementedException();
+            return (await GetAsync<IEnumerable<Order>>($"{Address}/list/{User.UserName}"))!;
         }
 
-        public Task<Order?> GetOrderAsync(int Id, CancellationToken Cancel = default)
+        public async Task<Order?> GetOrderAsync(int Id, CancellationToken Cancel = default)
         {
-            throw new NotImplementedException();
+            return await GetAsync<Order?>($"{Address}/{Id}");
         }
 
-        public Task<Order> CreateOrderAsync(User User, CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default)
+        public async Task<Order> CreateOrderAsync(User User, CartViewModel Cart, OrderVievModel OrderModel, CancellationToken Cancel = default)
         {
-            throw new NotImplementedException();
+            var orderDto = new CreateOrderDTO()
+            {
+                Cart = Cart,
+                OrderModel = OrderModel
+            };
+            var responce = await PostAsync($"{Address}/add/{User.UserName}", orderDto);
+
+            return (await responce.Content.ReadFromJsonAsync<Order>(cancellationToken: Cancel))!;
         }
     }
 }
