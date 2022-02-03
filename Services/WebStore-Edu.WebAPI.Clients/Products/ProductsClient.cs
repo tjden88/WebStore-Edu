@@ -2,6 +2,7 @@
 using MapsterMapper;
 using WebStore_Edu.Domain;
 using WebStore_Edu.Domain.DTO;
+using WebStore_Edu.Domain.DTO.Products;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.WebAPI.Clients.Base;

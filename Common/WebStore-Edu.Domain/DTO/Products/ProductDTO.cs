@@ -1,4 +1,4 @@
-﻿namespace WebStore_Edu.Domain.DTO
+﻿namespace WebStore_Edu.Domain.DTO.Products
 {
     public class ProductDTO
     {

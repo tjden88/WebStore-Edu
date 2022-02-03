@@ -1,6 +1,6 @@
-﻿namespace WebStore_Edu.Domain.DTO;
+﻿namespace WebStore_Edu.Domain.DTO.Products;
 
-public class SectionDTO
+public class BrandDTO
 {
     public int Id { get; set; }
 
@@ -8,5 +8,4 @@ public class SectionDTO
 
     public int Order { get; set; }
 
-    public int? ParentId { get; set; }
 }

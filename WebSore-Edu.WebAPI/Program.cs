@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebStore_Edu.DAL.Context;
 using WebStore_Edu.Domain.DTO;
+using WebStore_Edu.Domain.DTO.Orders;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;

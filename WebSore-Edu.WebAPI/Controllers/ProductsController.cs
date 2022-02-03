@@ -1,7 +1,7 @@
 ﻿using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebStore_Edu.Domain;
-using WebStore_Edu.Domain.DTO;
+using WebStore_Edu.Domain.DTO.Products;
 using WebStore_Edu.Interfaces.Services;
 
 namespace WebSore_Edu.WebAPI.Controllers
