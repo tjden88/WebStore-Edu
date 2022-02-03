@@ -2,7 +2,7 @@
 
 namespace WebSore_Edu.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(ApiAddresses.Values)]
     [ApiController]
     public class ValuesController : ControllerBase
     {

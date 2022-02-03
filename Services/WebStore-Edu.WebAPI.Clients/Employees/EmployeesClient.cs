@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using WebSore_Edu.WebAPI;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.WebAPI.Clients.Base;
@@ -7,7 +8,7 @@ namespace WebStore_Edu.WebAPI.Clients.Employees
 {
     public class EmployeesClient : BaseClient, IEmployeesData
     {
-        public EmployeesClient(HttpClient HttpHttp) : base(HttpHttp, "api/employees")
+        public EmployeesClient(HttpClient HttpHttp) : base(HttpHttp, ApiAddresses.Employees)
         {
         }
 

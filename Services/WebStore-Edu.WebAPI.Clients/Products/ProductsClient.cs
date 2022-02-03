@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using MapsterMapper;
+using WebSore_Edu.WebAPI;
 using WebStore_Edu.Domain;
-using WebStore_Edu.Domain.DTO;
 using WebStore_Edu.Domain.DTO.Products;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Interfaces.Services;
@@ -13,7 +13,7 @@ namespace WebStore_Edu.WebAPI.Clients.Products
     {
         private readonly IMapper _Mapper;
 
-        public ProductsClient(HttpClient HttpHttp, IMapper Mapper) : base(HttpHttp, "api/products")
+        public ProductsClient(HttpClient HttpHttp, IMapper Mapper) : base(HttpHttp, ApiAddresses.Products)
         {
             _Mapper = Mapper;
         }

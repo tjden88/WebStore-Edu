@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Mapster;
+using WebStore_Edu.Domain.DTO.Orders;
 using WebStore_Edu.Domain.Entityes;
 using WebStore_Edu.Domain.Entityes.Orders;
 using WebStore_Edu.Domain.ViewModels;
 
-namespace WebStore_Edu.Domain.DTO.Orders;
+namespace WebStore_Edu.Domain.DTO;
 
 public static class MappingConfig
 {

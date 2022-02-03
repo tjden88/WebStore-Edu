@@ -1,17 +1,17 @@
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using WebStore_Edu.DAL.Context;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 using WebStore_Edu.Domain.DTO;
-using WebStore_Edu.Domain.DTO.Orders;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
 using WebStore_Edu.Interfaces.TestApi;
-using WebStore_Edu.Services.Services;
 using WebStore_Edu.Services.Services.InCookies;
 using WebStore_Edu.WebAPI.Clients.Employees;
+using WebStore_Edu.WebAPI.Clients.Identity;
 using WebStore_Edu.WebAPI.Clients.Orders;
 using WebStore_Edu.WebAPI.Clients.Products;
 using WebStore_Edu.WebAPI.Clients.Values;
@@ -20,6 +20,14 @@ using WebStore_Edu.WebAPI.Clients.Values;
 #region Построение приложения
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Logging
+builder.Host.UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration)
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(new JsonFormatter(",", true), @$".\Logs\{DateTime.Today:d}.json"));
 
 var services = builder.Services;
 
@@ -43,9 +51,20 @@ services.AddHttpClient("WebApi", client => client.BaseAddress = new Uri(builder.
     .AddTypedClient<IOrderService, OrdersClient>()
     ;
 
-services.AddIdentity<User, Role>() // Identity
-    .AddEntityFrameworkStores<WebStoreDb>()
+// Identity
+services.AddIdentity<User, Role>()
     .AddDefaultTokenProviders();
+services.AddHttpClient("WebStoreAPIIdentity", client => client.BaseAddress = new(builder.Configuration["API"]))
+    .AddTypedClient<IUserStore<User>, UsersClient>()
+    .AddTypedClient<IUserRoleStore<User>, UsersClient>()
+    .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
+    .AddTypedClient<IUserEmailStore<User>, UsersClient>()
+    .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
+    .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
+    .AddTypedClient<IUserClaimStore<User>, UsersClient>()
+    .AddTypedClient<IUserLoginStore<User>, UsersClient>()
+    .AddTypedClient<IRoleStore<Role>, RolesClient>();
+
 
 services.Configure<IdentityOptions>(opt =>
 {
@@ -75,30 +94,6 @@ services.ConfigureApplicationCookie(opt =>
 
     opt.SlidingExpiration = true;
 });
-
-// Add db
-
-var db = builder.Configuration["Database"];
-
-switch (db)
-{
-    case "SqlServer":
-        services.AddDbContext<WebStoreDb>(opt =>
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
-        services.AddScoped<IDbInitializer, SqlServerDbInitializer>();
-        break;
-
-    case "SqLite":
-        services.AddDbContext<WebStoreDb>(opt =>
-            opt.UseSqlite(builder.Configuration.GetConnectionString("SqLite"),
-                o => o.MigrationsAssembly("WebStore-Edu.DAL.SqLite")));
-        services.AddScoped<IDbInitializer, SqLiteDbInitializer>();
-        break;
-
-    default:
-        throw new InvalidOperationException($"Тип БД {db} не поддерживается");
-}
-
 
 var app = builder.Build();
 
@@ -146,14 +141,6 @@ app.UseEndpoints(endpoints =>
 
 
 #endregion
-
-// Инициализация данных БД
-
-await using (var scope = app.Services.CreateAsyncScope())
-{
-    await scope.ServiceProvider.GetRequiredService<IDbInitializer>().InitializeAsync();
-}
-
 
 // Запуск приложения
 app.Run();
