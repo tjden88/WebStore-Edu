@@ -10,8 +10,8 @@ namespace WebStore_Edu.Interfaces.Identity
         IUserPhoneNumberStore<User>,
         IUserTwoFactorStore<User>,
         IUserLoginStore<User>,
-        IUserClaimStore<User>
-
+        IUserClaimStore<User>,
+        IUserLockoutStore<User>
     {
 
     }
