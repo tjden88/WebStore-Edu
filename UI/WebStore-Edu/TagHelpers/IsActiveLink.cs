@@ -8,6 +8,7 @@ namespace WebStore_Edu.TagHelpers;
 public class IsActiveLink : TagHelper
 {
     private const string AttributeName = "is-active-link";
+    private const string IgnoreAction = "ignore-action";
 
     [ViewContext, HtmlAttributeNotBound]
     public ViewContext? ViewContext { get; set; }
@@ -16,15 +17,24 @@ public class IsActiveLink : TagHelper
     {
         output.Attributes.RemoveAll(AttributeName);
 
+        var ignoreAction = output.Attributes.RemoveAll(IgnoreAction);
+
         var route = ViewContext?.RouteData.Values;
 
         var controllerRoute = route?["controller"];
         var actionRoute = route?["action"];
 
-        if (context.AllAttributes["asp-action"]?.Value is { } action
-            && Equals(action, actionRoute)
-            && context.AllAttributes["asp-controller"]?.Value is { } controller
-            && Equals(controller, controllerRoute))
+        bool needMakeActive = !(!ignoreAction
+                                && context.AllAttributes["asp-action"]?.Value is { } action
+                                && !Equals(action, actionRoute));
+
+        if (context.AllAttributes["asp-controller"]?.Value is { } controller
+            && !Equals(controller, controllerRoute))
+            needMakeActive = false;
+
+
+
+        if (needMakeActive)
         {
             var classAttribute = output.Attributes.FirstOrDefault(a => a.Name == "class");
 
@@ -35,7 +45,7 @@ public class IsActiveLink : TagHelper
             }
             else
             {
-                output.Attributes.SetAttribute("class", 
+                output.Attributes.SetAttribute("class",
                     $"{classAttribute.Value.ToString()?.Replace("active", "")} active");
             }
         }

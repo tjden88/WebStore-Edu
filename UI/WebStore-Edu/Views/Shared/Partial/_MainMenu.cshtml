@@ -1,7 +1,7 @@
 ﻿<div class="mainmenu pull-left">
     <ul class="nav navbar-nav collapse navbar-collapse">
         <li><a asp-action="Index" asp-controller="Home" is-active-link>Главная</a></li>
-        <li class="dropdown"><a asp-controller="Shop" asp-action="Index" is-active-link>Магазин<i class="fa fa-angle-down"></i></a>
+        <li class="dropdown"><a asp-controller="Shop" asp-action="Index" is-active-link ignore-action>Магазин<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
                 <li><a asp-controller="Shop" asp-action="Index" is-active-link>Каталог</a></li>
                 <li><a asp-controller="Cart" asp-action="Checkout" is-active-link>Оформить заказ</a></li> 
@@ -9,7 +9,7 @@
                 <li><a asp-controller="Account" asp-action="Login" is-active-link>Вход</a></li> 
             </ul>
         </li> 
-        <li class="dropdown"><a asp-controller="Blogs" asp-action="Index"  is-active-link>Блог<i class="fa fa-angle-down"></i></a>
+        <li class="dropdown"><a asp-controller="Blogs" asp-action="Index"  is-active-link ignore-action>Блог<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
                 <li><a asp-controller="Blogs" asp-action="Index" is-active-link>Список блогов</a></li>
                 <li><a asp-controller="Blogs" asp-action="Blog" is-active-link>Блог магазина</a></li>
