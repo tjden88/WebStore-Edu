@@ -1,23 +1,23 @@
 ﻿<div class="mainmenu pull-left">
     <ul class="nav navbar-nav collapse navbar-collapse">
-        <li><a asp-action="Index" asp-controller="Home" class="active">Главная</a></li>
+        <li><a asp-action="Index" asp-controller="Home" is-active-link>Главная</a></li>
         <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
-                <li><a asp-controller="Shop" asp-action="Index">Каталог</a></li>
-                <li><a asp-controller="Cart" asp-action="Checkout">Оформить заказ</a></li> 
-                <li><a asp-controller="Cart" asp-action="Index">Корзина</a></li> 
-                <li><a asp-controller="Account" asp-action="Login">Вход</a></li> 
+                <li><a asp-controller="Shop" asp-action="Index" is-active-link>Каталог</a></li>
+                <li><a asp-controller="Cart" asp-action="Checkout" is-active-link>Оформить заказ</a></li> 
+                <li><a asp-controller="Cart" asp-action="Index" is-active-link>Корзина</a></li> 
+                <li><a asp-controller="Account" asp-action="Login" is-active-link>Вход</a></li> 
             </ul>
         </li> 
         <li class="dropdown"><a href="#">Блог<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
-                <li><a asp-controller="Blogs" asp-action="Index">Список блогов</a></li>
-                <li><a asp-controller="Blogs" asp-action="Blog">Блог магазина</a></li>
+                <li><a asp-controller="Blogs" asp-action="Index" is-active-link>Список блогов</a></li>
+                <li><a asp-controller="Blogs" asp-action="Blog" is-active-link>Блог магазина</a></li>
             </ul>
         </li> 
         <li><a asp-action="NotFoundPage" asp-controller="Home">404</a></li>
-        <li><a asp-action="Contacts" asp-controller="Home">Контакты</a></li>
-        <li><a asp-controller="Employees" asp-action="Index">Список сотрудников</a></li>
+        <li><a asp-action="Contacts" is-active-link asp-controller="Home">Контакты</a></li>
+        <li><a asp-controller="Employees" is-active-link asp-action="Index">Список сотрудников</a></li>
         <li><a asp-controller="WebApi" asp-action="Index" is-active-link>WebApi</a></li>
     </ul>
 </div>
