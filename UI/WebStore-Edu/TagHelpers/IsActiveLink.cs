@@ -9,13 +9,6 @@ public class IsActiveLink : TagHelper
 {
     private const string AttributeName = "is-active-link";
 
-    [HtmlAttributeName("asp-controller")]
-    public string? Controller { get; set; }
-
-
-    [HtmlAttributeName("asp-action")]
-    public string? Action { get; set; }
-
     [ViewContext, HtmlAttributeNotBound]
     public ViewContext? ViewContext { get; set; }
 
@@ -28,8 +21,10 @@ public class IsActiveLink : TagHelper
         var controllerRoute = route?["controller"];
         var actionRoute = route?["action"];
 
-        if (Action is { } action && Equals(action, actionRoute)
-                                 && Controller is { } controller && Equals(controller, controllerRoute))
+        if (context.AllAttributes["asp-action"]?.Value is { } action
+            && Equals(action, actionRoute)
+            && context.AllAttributes["asp-controller"]?.Value is { } controller
+            && Equals(controller, controllerRoute))
         {
             var classAttribute = output.Attributes.FirstOrDefault(a => a.Name == "class");
 
