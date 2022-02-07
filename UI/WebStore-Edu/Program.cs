@@ -2,8 +2,6 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Json;
 using WebStore_Edu.Domain.DTO;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
@@ -22,12 +20,12 @@ using WebStore_Edu.WebAPI.Clients.Values;
 var builder = WebApplication.CreateBuilder(args);
 
 // Logging
-builder.Host.UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration)
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .WriteTo.Console()
-    .WriteTo.File(new JsonFormatter(",", true), @$".\Logs\{DateTime.Today:d}.json"));
+builder.Host.UseSerilog((host, log) => log.ReadFrom.Configuration(host.Configuration));
+    //.MinimumLevel.Debug()
+    //.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    //.Enrich.FromLogContext()
+    //.WriteTo.Console()
+    //.WriteTo.File(new JsonFormatter(",", true), @$".\Logs\{DateTime.Today:d}.json"));
 
 var services = builder.Services;
 
