@@ -4,11 +4,11 @@
     {
         <li><a asp-area="Admin" asp-controller="Home" asp-action="Index"><i class="fa fa-android"></i> Админка</a></li>
     }
-    <li><a asp-controller="Account" asp-action="Index"><i class="fa fa-user"></i> @User.Identity!.Name</a></li>
+    <li><a asp-controller="Account" asp-action="Index" is-active-link><i class="fa fa-user"></i> @User.Identity!.Name</a></li>
     <li><a href="#"><i class="fa fa-star"></i> Список желаний</a></li>
-    <li><a asp-controller="Cart" asp-action="Checkout"><i class="fa fa-crosshairs"></i> Оформить заказ</a></li>
+    <li><a asp-controller="Cart" asp-action="Checkout" is-active-link><i class="fa fa-crosshairs"></i> Оформить заказ</a></li>
     <li>
-        <a asp-controller="Cart" asp-action="Index">
+        <a asp-controller="Cart" asp-action="Index" is-active-link>
             <i class="fa fa-shopping-cart"></i> Корзина
             @if (ViewBag.CartCount > 0)
             {
