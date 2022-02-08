@@ -17,8 +17,8 @@
                                 <a asp-controller="Shop" 
                                    asp-action="ProductDetails"
                                    asp-route-Id="@product.Id"
-                                   asp-route-BrandId="@Context.Request.Query["BrandId"]"
-                                   asp-route-SectionId="@Context.Request.Query["SectionId"]"
+                                   asp-route-BrandId="@product.BrandId"
+                                   asp-route-SectionId="@product.SectionId"
                                    >@product.Name
                                     </a>
                             </p>
