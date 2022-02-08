@@ -11,9 +11,9 @@
         /// <summary>Путь к картинке</summary>
         public string ImageUrl { get; set; }
 
-        public int SectionId { get; set; }
+        public SectionDTO Section { get; set; }
 
-        public int? BrandId { get; set; }
+        public BrandDTO? Brand { get; set; }
 
     }
 }

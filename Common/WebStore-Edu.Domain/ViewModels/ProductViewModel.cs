@@ -22,5 +22,8 @@ namespace WebStore_Edu.Domain.ViewModels
 
         [Display(Name = "Бренд")]
         public string? Brand { get; set; }
+
+        public int SectionId { get; set; }
+        public int? BrandId { get; set; }
     }
 }

@@ -18,6 +18,10 @@ namespace WebStore_Edu.Components
 
         public IViewComponentResult Invoke()
         {
+            var selectedSectionId = int.TryParse(HttpContext.Request.Query["SectionId"], out var id) ? id : 0;
+
+            var parentSectionId = 0;
+
             var allSections = _ProductData.GetSections().ToArray();
 
             var parentSectionsVm = allSections
@@ -34,6 +38,10 @@ namespace WebStore_Edu.Components
                         {
                             var childVm = _Mapper.Map<SectionViewModel>(s);
                             childVm.Parent = section;
+
+                            if (childVm.Id == selectedSectionId)
+                                parentSectionId = section.Id;
+
                             return childVm;
                         })
                         .OrderBy(vm => vm.Order)
@@ -42,6 +50,8 @@ namespace WebStore_Edu.Components
 
                 section.Children = childs;
             }
+
+            ViewBag.SelectedParentSection = parentSectionId;
 
             return View(parentSectionsVm);
         }

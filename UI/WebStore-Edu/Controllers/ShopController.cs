@@ -31,14 +31,8 @@ namespace WebStore_Edu.Controllers
                 .GetProducts(filter)
                 .OrderBy(p=>p.Order);
 
-            var model = new ShopViewModel()
-            {
-                BrandId = BrandId,
-                SectionId = SectionId,
-                Products = _Mapper.Map<IEnumerable<ProductViewModel>>(products)
-            };
-
-            return View(model);
+            var productViewModels = _Mapper.Map<IEnumerable<ProductViewModel>>(products);
+            return View(productViewModels);
         }
 
         public IActionResult ProductDetails(int Id)
