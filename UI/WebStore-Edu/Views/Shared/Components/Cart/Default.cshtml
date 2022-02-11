@@ -1,5 +1,11 @@
-﻿<i class="fa fa-shopping-cart"></i> Корзина
-@if (ViewBag.CartCount > 0)
+﻿@model int
+
+<i class="fa fa-shopping-cart"></i> Корзина
+@if (Model > 0)
 {
-    <text> (Товаров: @ViewBag.CartCount)</text>
+    <text> (Товаров: @Model)</text>
+}
+else
+{
+    <text> пуста</text>
 }
