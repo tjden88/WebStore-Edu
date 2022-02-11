@@ -63,7 +63,7 @@
                             <form asp-controller="Cart" asp-action="Add" asp-route-Id="@Model.Id">
                                 <span>@Model.Price.ToString("C")</span>
                                 <label>Количество:</label>
-                                <input type="text" name="Quantity" value="1" />
+                                <input type="text" id="cart-add-quantity" name="Quantity" value="1" />
                                 <input name="ReturnUrl" class="hidden" value="@Url.Action("Index", "Shop")" />
 
                                 <button type="submit"

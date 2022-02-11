@@ -17,7 +17,7 @@
         var htmlElement = $(this);
 
         const id = htmlElement.data("id");
-        const quantity = htmlElement.data("quantity");
+        const quantity = $("#cart-add-quantity").val() ?? 1;
 
         const query = Cart._properties.addToCartLink + "/" + id + "?Quantity=" + quantity;
 
