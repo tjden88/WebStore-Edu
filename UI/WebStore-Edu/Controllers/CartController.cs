@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using WebStore_Edu.Domain.Identity;
 using WebStore_Edu.Domain.ViewModels;
 using WebStore_Edu.Interfaces.Services;
@@ -68,5 +69,21 @@ namespace WebStore_Edu.Controllers
         public IActionResult OrderConfirmed(int OrderId) => View(OrderId);
 
 
+        #region JS
+
+        public IActionResult GetCartView() => ViewComponent("Cart");
+
+        public IActionResult AddJs(int Id, int Quantity = 1)
+        {
+            _CartService.Add(Id, Quantity);
+            return Ok(new {Message = $"Изменено количество товаров в корзине на {Quantity}"});
+        }
+
+        public IActionResult RemoveJs(int Id)
+        {
+            _CartService.Remove(Id);
+            return Ok(new { Message = $"Товар {Id} удалён из корзины" });
+        }
+        #endregion
     }
 }
