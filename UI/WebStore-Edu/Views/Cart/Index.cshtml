@@ -49,16 +49,30 @@
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="1"> + </a>
+                                    <a class="cart_quantity_up" asp-action="Add"
+                                   asp-route-Id="@item.Product.Id"
+                                   asp-route-Quantity="1"
+                                   data-id="@item.Product.Id"> + </a>
                                     <input class="cart_quantity_input" type="text" name="quantity" value="@item.Quantity" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" asp-action="Add" asp-route-Id="@item.Product.Id" asp-route-Quantity="-1"> - </a>
+                                    <a class="cart_quantity_down" asp-action="Add"
+                                   asp-route-Id="@item.Product.Id"
+                                   asp-route-Quantity="-1"
+                                   data-id="@item.Product.Id"> - </a>
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">@(item.Quantity * item.Product.Price)</p>
+                                <p class="cart_total_price"
+                               data-price="@(item.Quantity * item.Product.Price)">
+                                    @((item.Quantity * item.Product.Price).ToString("C"))
+                                </p>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" asp-action="Remove" asp-route-Id="@item.Product.Id"><i class="fa fa-times"></i></a>
+                                <a class="cart_quantity_delete"
+                               asp-action="Remove"
+                               asp-route-Id="@item.Product.Id"
+                               data-id="@item.Product.Id">
+                                    <i class="fa fa-times"></i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -79,9 +93,11 @@
                 <div class="total_area">
                     <ul>
                         <li>Стоимость доставки <span>Бесплатно</span></li>
-                        <li>Итого <span>@Model.TotalPrice.ToString("C")</span></li>
+                        <li data-price="@Model.TotalPrice">
+                            Итого <span>@Model.TotalPrice.ToString("C")</span>
+                        </li>
                     </ul>
-                        <a class="btn btn-default update" asp-action="Checkout">Оформить заказ</a>
+                    <a class="btn btn-default update" asp-action="Checkout">Оформить заказ</a>
                 </div>
             </div>
         </div>
