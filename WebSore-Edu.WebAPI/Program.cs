@@ -88,4 +88,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await using var scope = app.Services.CreateAsyncScope();
+
+await scope.ServiceProvider.GetRequiredService<IDbInitializer>().InitializeAsync();
+
 app.Run();
